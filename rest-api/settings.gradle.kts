@@ -8,3 +8,4 @@ include("internal:weather:api")
 
 include("internal:user-access")
 include("internal:user-access:domain")
+include("internal:user-access:api")
