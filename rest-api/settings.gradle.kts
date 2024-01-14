@@ -1,0 +1,1 @@
+rootProject.name = "kweather-api"
