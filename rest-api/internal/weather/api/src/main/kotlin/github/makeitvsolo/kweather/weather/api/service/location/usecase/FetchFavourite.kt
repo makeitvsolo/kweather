@@ -2,6 +2,7 @@ package github.makeitvsolo.kweather.weather.api.service.location.usecase
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.core.mapping.Into
+import github.makeitvsolo.kweather.weather.api.datasource.location.operation.MapFindFavouriteErrorInto
 import github.makeitvsolo.kweather.weather.api.service.location.dto.AccountDto
 import github.makeitvsolo.kweather.weather.api.service.location.dto.FavouriteLocationDto
 import github.makeitvsolo.kweather.weather.api.service.location.dto.LocationDto
@@ -18,6 +19,15 @@ interface MapFetchFavouriteErrorInto<out R> : Into<R> {
 }
 
 sealed interface FetchFavouriteError {
+
+    object FromFindFavouriteError : MapFindFavouriteErrorInto<FetchFavouriteError> {
+
+        override fun fromNotFoundError(details: String): FetchFavouriteError =
+            NotFoundError(details)
+
+        override fun fromInternalError(throwable: Throwable): FetchFavouriteError =
+            InternalError(throwable)
+    }
 
     fun <R, M : MapFetchFavouriteErrorInto<R>> into(map: M): R
 
