@@ -25,18 +25,18 @@ sealed interface RefreshAccessTokenError {
             InternalError(throwable)
     }
 
-    fun <R, M : MapRefreshAccessTokenErrorInto<R>> mapBy(mapper: M): R
+    fun <R, M : MapRefreshAccessTokenErrorInto<R>> into(map: M): R
 
     data class InvalidTokenError(private val details: String) : RefreshAccessTokenError {
 
-        override fun <R, M : MapRefreshAccessTokenErrorInto<R>> mapBy(mapper: M): R =
-            mapper.fromInvalidTokenError(details)
+        override fun <R, M : MapRefreshAccessTokenErrorInto<R>> into(map: M): R =
+            map.fromInvalidTokenError(details)
     }
 
     data class InternalError(private val throwable: Throwable) : RefreshAccessTokenError {
 
-        override fun <R, M : MapRefreshAccessTokenErrorInto<R>> mapBy(mapper: M): R =
-            mapper.fromInternalError(throwable)
+        override fun <R, M : MapRefreshAccessTokenErrorInto<R>> into(map: M): R =
+            map.fromInternalError(throwable)
     }
 }
 
