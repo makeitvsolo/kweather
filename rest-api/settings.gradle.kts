@@ -14,6 +14,12 @@ include("internal:user-access:infrastructure")
 
 dependencyResolutionManagement {
     versionCatalogs {
+        create("workspace") {
+            val bcrypt = version("bcrypt", "0.10.2")
+
+            library("security-bcrypt", "at.favre.lib", "bcrypt").versionRef(bcrypt)
+        }
+
         create("testWorkspace") {
             val kotlinTest = version("kotlin-test", "1.9.21")
             val mockito = version("mockito", "5.2.1")
