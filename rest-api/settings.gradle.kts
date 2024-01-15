@@ -18,8 +18,14 @@ dependencyResolutionManagement {
             val bcrypt = version("bcrypt", "0.10.2")
             val jwt = version("jwt", "4.4.0")
 
+            val postgres = version("postgres", "42.7.1")
+            val hikari = version("hikari", "5.1.0")
+
             library("security-bcrypt", "at.favre.lib", "bcrypt").versionRef(bcrypt)
             library("security-jwt", "com.auth0", "java-jwt").versionRef(jwt)
+
+            library("datasource-postgres", "org.postgresql", "postgresql").versionRef(postgres)
+            library("datasource-hikari", "com.zaxxer", "HikariCP").versionRef(hikari)
         }
 
         create("testWorkspace") {
