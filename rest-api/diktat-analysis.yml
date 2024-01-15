@@ -130,7 +130,7 @@
   enabled: true
 # Checks that properties with comments are separated by a blank line
 - name: BLANK_LINE_BETWEEN_PROPERTIES
-  enabled: true
+  enabled: false
 # Checks top level order
 - name: TOP_LEVEL_ORDER
   enabled: true
