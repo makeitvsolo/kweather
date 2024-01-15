@@ -11,6 +11,7 @@ include("internal:user-access:domain")
 include("internal:user-access:api")
 include("internal:user-access:application")
 include("internal:user-access:infrastructure")
+include("internal:user-access:tests")
 
 dependencyResolutionManagement {
     versionCatalogs {
