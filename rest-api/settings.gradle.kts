@@ -32,10 +32,14 @@ dependencyResolutionManagement {
         create("testWorkspace") {
             val kotlinTest = version("kotlin-test", "1.9.21")
             val mockito = version("mockito", "5.2.1")
+            val testcontainers = version("testcontainers", "1.19.3")
 
             library("kotlin-test", "org.jetbrains.kotlin", "kotlin-test").versionRef(kotlinTest)
 
             library("mockito-kotlin", "org.mockito.kotlin", "mockito-kotlin").versionRef(mockito)
+
+            library("testcontainers-core", "org.testcontainers", "testcontainers").versionRef(testcontainers)
+            library("testcontainers-junit", "org.testcontainers", "junit-jupiter").versionRef(testcontainers)
         }
     }
 }
