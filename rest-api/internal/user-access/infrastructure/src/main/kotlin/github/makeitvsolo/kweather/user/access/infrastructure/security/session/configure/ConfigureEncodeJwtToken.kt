@@ -33,6 +33,12 @@ class ConfigureEncodeJwtToken internal constructor(
     fun refreshAlgorithm(name: String) =
         apply { this.refreshConfiguration = refreshConfiguration.copy(algorithm = name) }
 
+    fun accessSecretKey(key: String) =
+        apply { this.accessConfiguration = accessConfiguration.copy(secretKey = key) }
+
+    fun refreshSecretKey(key: String) =
+        apply { this.refreshConfiguration = refreshConfiguration.copy(secretKey = key) }
+
     fun accessTimeToLive(seconds: Long) =
         apply { this.accessConfiguration = accessConfiguration.copy(timeToLive = seconds) }
 
