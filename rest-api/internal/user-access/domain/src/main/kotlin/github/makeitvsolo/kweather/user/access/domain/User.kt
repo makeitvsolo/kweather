@@ -5,7 +5,11 @@ import github.makeitvsolo.kweather.core.type.Unique
 
 interface MapUserInto<out R> : Into<R> {
 
-    fun from(id: String, name: String): R
+    fun from(
+        id: String,
+        name: String,
+        password: String
+    ): R
 }
 
 class User internal constructor(
@@ -18,7 +22,7 @@ class User internal constructor(
         this.password == password && this.name == name
 
     fun <R, M : MapUserInto<R>> into(map: M): R =
-        map.from(id, name)
+        map.from(id, name, password)
 
     override fun equals(other: Any?): Boolean = (other is User) && id == other.id
 

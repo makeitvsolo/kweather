@@ -17,7 +17,11 @@ data class TokenPayload(
 
     object FromUser : MapUserInto<TokenPayload> {
 
-        override fun from(id: String, name: String): TokenPayload =
+        override fun from(
+            id: String,
+            name: String,
+            password: String
+        ): TokenPayload =
             TokenPayload(id, name)
     }
 }

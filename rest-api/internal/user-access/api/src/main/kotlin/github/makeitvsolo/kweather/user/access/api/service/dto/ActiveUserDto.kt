@@ -9,7 +9,11 @@ data class ActiveUserDto(
 
     object FromUser : MapUserInto<ActiveUserDto> {
 
-        override fun from(id: String, name: String): ActiveUserDto =
+        override fun from(
+            id: String,
+            name: String,
+            password: String
+        ): ActiveUserDto =
             ActiveUserDto(id, name)
     }
 }
