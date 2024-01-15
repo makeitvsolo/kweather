@@ -50,7 +50,7 @@ internal class BaseEncodeJwtToken internal constructor(
 
     companion object {
 
-        const val DEFAULT_DECODE_ERROR = "invalid token"
-        const val USER_NAME_CLAIM = "name"
+        private const val DEFAULT_DECODE_ERROR = "invalid token"
+        private const val USER_NAME_CLAIM = "name"
     }
 }
