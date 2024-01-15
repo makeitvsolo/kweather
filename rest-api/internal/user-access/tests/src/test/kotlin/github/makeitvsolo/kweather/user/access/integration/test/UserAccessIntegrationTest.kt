@@ -19,6 +19,37 @@ import java.time.Duration
 @Testcontainers
 abstract class UserAccessIntegrationTest {
 
+    protected val unique: UniqueId = UniqueId()
+
+    protected val bcrypt: BcryptHash = ConfigureBcryptHash.with()
+        .cost(BcryptConfiguration.BCRYPT_COST)
+        .salt(BcryptConfiguration.BCRYPT_SALT.toByteArray())
+        .configured()
+        .unwrap()
+
+    protected val jwt: EncodeJwtToken = ConfigureEncodeJwtToken.with()
+        .accessAlgorithm(JwtConfiguration.ALGORITHM)
+        .refreshAlgorithm(JwtConfiguration.ALGORITHM)
+        .accessSecretKey(JwtConfiguration.SECRET)
+        .refreshSecretKey(JwtConfiguration.SECRET)
+        .accessTimeToLive(JwtConfiguration.ACCESS_TIME_TO_LIVE)
+        .refreshTimeToLive(JwtConfiguration.REFRESH_TIME_TO_LIVE)
+        .configured()
+        .unwrap()
+
+    protected val repository: SqlUserRepository = ConfigureSqlUserRepository.with()
+        .datasourceUrl(
+            "jdbc:postgresql://${postgresContainer.host}:${
+                postgresContainer.getMappedPort(
+                    PostgresConfiguration.POSTGRES_PORT
+                )
+            }/${PostgresConfiguration.POSTGRES_DATABASE}"
+        )
+        .username(PostgresConfiguration.POSTGRES_USER)
+        .password(PostgresConfiguration.POSTGRES_PASSWORD)
+        .configured()
+        .unwrap()
+
     object PostgresConfiguration {
 
         const val POSTGRES_IMAGE = "postgres:15"
@@ -39,6 +70,7 @@ abstract class UserAccessIntegrationTest {
     object JwtConfiguration {
 
         const val ALGORITHM = "hmac256"
+        const val SECRET = "supersecret"
         const val ACCESS_TIME_TO_LIVE = 500L
         const val REFRESH_TIME_TO_LIVE = 3600L
     }
@@ -58,34 +90,5 @@ abstract class UserAccessIntegrationTest {
                 Wait.forLogMessage(PostgresConfiguration.POSTGRES_HEALTH_LOG_MESSAGE, 2)
                     .withStartupTimeout(Duration.ofSeconds(60))
             )
-
-        val unique: UniqueId = UniqueId()
-
-        val bcrypt: BcryptHash = ConfigureBcryptHash.with()
-            .cost(BcryptConfiguration.BCRYPT_COST)
-            .salt(BcryptConfiguration.BCRYPT_SALT.toByteArray())
-            .configured()
-            .unwrap()
-
-        val jwt: EncodeJwtToken = ConfigureEncodeJwtToken.with()
-            .accessAlgorithm(JwtConfiguration.ALGORITHM)
-            .refreshAlgorithm(JwtConfiguration.ALGORITHM)
-            .accessTimeToLive(JwtConfiguration.ACCESS_TIME_TO_LIVE)
-            .refreshTimeToLive(JwtConfiguration.REFRESH_TIME_TO_LIVE)
-            .configured()
-            .unwrap()
-
-        val repository: SqlUserRepository = ConfigureSqlUserRepository.with()
-            .datasourceUrl(
-                "jdbc:postgresql://${postgresContainer.host}:${
-                    postgresContainer.getMappedPort(
-                        PostgresConfiguration.POSTGRES_PORT
-                    )
-                }/${PostgresConfiguration.POSTGRES_DATABASE}"
-            )
-            .username(PostgresConfiguration.POSTGRES_USER)
-            .password(PostgresConfiguration.POSTGRES_PASSWORD)
-            .configured()
-            .unwrap()
     }
 }
