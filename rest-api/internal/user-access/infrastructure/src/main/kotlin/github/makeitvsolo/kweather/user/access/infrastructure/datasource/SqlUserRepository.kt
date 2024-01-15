@@ -10,7 +10,6 @@ import github.makeitvsolo.kweather.user.access.infrastructure.datasource.query.D
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.query.UserQuery
 
 import java.sql.SQLException
-import java.sql.SQLIntegrityConstraintViolationException
 import javax.sql.DataSource
 
 data class CreateTableError internal constructor(private val throwable: Throwable)
@@ -40,9 +39,11 @@ class SqlUserRepository internal constructor(
             }
 
             return Result.ok(Unit)
-        } catch (ex: SQLIntegrityConstraintViolationException) {
-            return Result.error(SaveUserError.ConflictError("user already exists"))
         } catch (ex: SQLException) {
+            if (ex.sqlState == POSTGRES_CONSTRAINT_ERROR_CODE) {
+                return Result.error(SaveUserError.ConflictError("user already exists"))
+            }
+
             return Result.error(SaveUserError.InternalError(ex))
         }
     }
@@ -114,5 +115,10 @@ class SqlUserRepository internal constructor(
         } catch (ex: SQLException) {
             return Result.error(DropTableError(ex))
         }
+    }
+
+    companion object {
+
+        private const val POSTGRES_CONSTRAINT_ERROR_CODE = "23505"
     }
 }
