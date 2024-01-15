@@ -1,15 +1,15 @@
 package github.makeitvsolo.kweather.user.access.infrastructure.security.session.internal
 
+import github.makeitvsolo.kweather.user.access.api.security.session.DecodeTokenError
 import github.makeitvsolo.kweather.user.access.api.security.session.TokenPayload
 import github.makeitvsolo.kweather.user.access.infrastructure.InfrastructureUnitTest
 
 import com.auth0.jwt.algorithms.Algorithm
-import github.makeitvsolo.kweather.user.access.api.security.session.DecodeTokenError
+
+import java.time.Instant
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-
-import java.time.Instant
 import kotlin.test.assertTrue
 
 class BaseEncodeJwtTokenTests : InfrastructureUnitTest() {
