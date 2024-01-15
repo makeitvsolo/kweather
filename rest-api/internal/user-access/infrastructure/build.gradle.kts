@@ -4,6 +4,7 @@ dependencies {
     implementation(project(":internal:user-access:api"))
 
     implementation(workspace.security.bcrypt)
+    implementation(workspace.security.jwt)
 
     testImplementation(testWorkspace.kotlin.test)
 }

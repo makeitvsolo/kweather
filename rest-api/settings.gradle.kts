@@ -16,8 +16,10 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("workspace") {
             val bcrypt = version("bcrypt", "0.10.2")
+            val jwt = version("jwt", "4.4.0")
 
             library("security-bcrypt", "at.favre.lib", "bcrypt").versionRef(bcrypt)
+            library("security-jwt", "com.auth0", "java-jwt").versionRef(jwt)
         }
 
         create("testWorkspace") {
