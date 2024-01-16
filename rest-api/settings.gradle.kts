@@ -6,6 +6,7 @@ include("internal:weather")
 include("internal:weather:domain")
 include("internal:weather:api")
 include("internal:weather:application")
+include("internal:weather:infrastructure")
 
 include("internal:user-access")
 include("internal:user-access:domain")
