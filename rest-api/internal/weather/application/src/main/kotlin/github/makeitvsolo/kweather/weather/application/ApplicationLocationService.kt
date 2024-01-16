@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.weather
+package github.makeitvsolo.kweather.weather.application
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.service.location.LocationService

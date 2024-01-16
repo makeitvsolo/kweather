@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.weather.usecase.location
+package github.makeitvsolo.kweather.weather.application.usecase.location
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.datasource.location.LocationRepository
