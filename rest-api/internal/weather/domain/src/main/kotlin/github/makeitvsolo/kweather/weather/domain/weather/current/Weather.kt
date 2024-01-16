@@ -37,7 +37,7 @@ class Weather internal constructor(
     private val precipitation: Precipitation
 ) {
 
-    fun <R, M : MapWeatherInto<R>> mapBy(map: M): R =
+    fun <R, M : MapWeatherInto<R>> into(map: M): R =
         map.from(code, summary, localTime, temperature, wind, pressure, humidity, cloudiness, precipitation)
 
     companion object {
