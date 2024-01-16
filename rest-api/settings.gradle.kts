@@ -24,11 +24,14 @@ dependencyResolutionManagement {
             val postgres = version("postgres", "42.7.1")
             val hikari = version("hikari", "5.1.0")
 
+            val fuel = version("fuel", "2.3.1")
+
             library("security-bcrypt", "at.favre.lib", "bcrypt").versionRef(bcrypt)
             library("security-jwt", "com.auth0", "java-jwt").versionRef(jwt)
 
             library("datasource-postgres", "org.postgresql", "postgresql").versionRef(postgres)
             library("datasource-hikari", "com.zaxxer", "HikariCP").versionRef(hikari)
+            library("datasource-fuel", "com.github.kittinunf.fuel", "fuel").versionRef(fuel)
         }
 
         create("testWorkspace") {

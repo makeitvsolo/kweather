@@ -5,4 +5,5 @@ dependencies {
 
     implementation(workspace.datasource.postgres)
     implementation(workspace.datasource.hikari)
+    implementation(workspace.datasource.fuel)
 }
