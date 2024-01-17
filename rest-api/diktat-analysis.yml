@@ -374,7 +374,7 @@
     maxLambdaLength: 10 # max length of lambda without parameters
 # Checks that using unnecessary, custom label
 - name: CUSTOM_LABEL
-  enabled: true
+  enabled: false
 # Check that lambda with inner lambda doesn't use implicit parameter
 - name: PARAMETER_NAME_IN_OUTER_LAMBDA
   enabled: true
