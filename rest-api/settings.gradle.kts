@@ -32,6 +32,7 @@ dependencyResolutionManagement {
             library("datasource-postgres", "org.postgresql", "postgresql").versionRef(postgres)
             library("datasource-hikari", "com.zaxxer", "HikariCP").versionRef(hikari)
             library("datasource-fuel", "com.github.kittinunf.fuel", "fuel").versionRef(fuel)
+            library("datasource-fuel-gson", "com.github.kittinunf.fuel", "fuel-gson").versionRef(fuel)
         }
 
         create("testWorkspace") {
