@@ -14,13 +14,19 @@ import javax.sql.DataSource
 
 data class Coordinates(val latitude: BigDecimal, val longitude: BigDecimal)
 
-data class ExistsFavouriteError(private val throwable: Throwable)
+data class ExistsFavouriteError(private val throwable: Throwable) {
+
+    fun intoThrowable(): Throwable = throwable
+}
 
 data class CreateTableError internal constructor(private val throwable: Throwable)
 
 data class DropTableError internal constructor(private val throwable: Throwable)
 
-data class FindFavouriteCoordinatesError(private val throwable: Throwable)
+data class FindFavouriteCoordinatesError(private val throwable: Throwable) {
+
+    fun intoThrowable(): Throwable = throwable
+}
 
 class SqlLocationRepository internal constructor(
     private val dataSource: DataSource

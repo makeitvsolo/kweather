@@ -19,13 +19,24 @@ data class WeatherApiLocation(
     val url: String
 )
 
-data class SearchByNameError(private val throwable: Throwable)
+data class SearchByNameError(private val throwable: Throwable) {
+
+    fun intoThrowable(): Throwable = throwable
+}
 
 sealed interface SearchByCoordinatesError {
 
-    data class NotFoundError(private val details: String) : SearchByCoordinatesError
+    fun intoThrowable(): Throwable
 
-    data class InternalError(private val throwable: Throwable) : SearchByCoordinatesError
+    data class NotFoundError(private val details: String) : SearchByCoordinatesError {
+
+        override fun intoThrowable(): Throwable = Throwable(details)
+    }
+
+    data class InternalError(private val throwable: Throwable) : SearchByCoordinatesError {
+
+        override fun intoThrowable(): Throwable = throwable
+    }
 }
 
 class WeatherApiLocationRepository internal constructor(
