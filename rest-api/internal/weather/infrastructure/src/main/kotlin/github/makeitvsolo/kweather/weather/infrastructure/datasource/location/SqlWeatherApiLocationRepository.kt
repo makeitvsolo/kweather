@@ -90,7 +90,7 @@ class SqlWeatherApiLocationRepository internal constructor(
             val locations: MutableList<Location> = mutableListOf()
 
             for (location in response) {
-                val result = sql.existsFavourite(accountId, location.lat, location.lon)
+                val result = sql.existsFavourite(accountId, location.latitude, location.longitude)
 
                 if (result.isError) {
                     val error = result.unwrapError()
@@ -103,8 +103,8 @@ class SqlWeatherApiLocationRepository internal constructor(
                         location.name,
                         location.region,
                         location.country,
-                        location.lat,
-                        location.lon,
+                        location.latitude,
+                        location.longitude,
                         isFavourite = exists
                     )
                 )

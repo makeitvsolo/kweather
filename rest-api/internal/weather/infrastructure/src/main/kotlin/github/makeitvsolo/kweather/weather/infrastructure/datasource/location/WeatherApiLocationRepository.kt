@@ -6,17 +6,18 @@ import com.github.kittinunf.fuel.gson.responseObject
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result.Failure
 import com.github.kittinunf.result.Result.Success
+import com.google.gson.annotations.SerializedName
 
 import java.math.BigDecimal
 
 data class WeatherApiLocation(
-    val id: Int,
-    val name: String,
-    val region: String,
-    val country: String,
-    val lat: BigDecimal,
-    val lon: BigDecimal,
-    val url: String
+    @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("region") val region: String,
+    @SerializedName("country") val country: String,
+    @SerializedName("lat") val latitude: BigDecimal,
+    @SerializedName("lon") val longitude: BigDecimal,
+    @SerializedName("url") val url: String
 )
 
 data class SearchByNameError(private val throwable: Throwable) {
