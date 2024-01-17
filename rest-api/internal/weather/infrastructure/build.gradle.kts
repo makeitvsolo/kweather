@@ -7,4 +7,5 @@ dependencies {
     implementation(workspace.datasource.hikari)
     implementation(workspace.datasource.fuel)
     implementation(workspace.datasource.fuel.gson)
+    implementation(workspace.datasource.gson)
 }

@@ -25,6 +25,7 @@ dependencyResolutionManagement {
             val hikari = version("hikari", "5.1.0")
 
             val fuel = version("fuel", "2.3.1")
+            val gson = version("gson", "2.8.5")
 
             library("security-bcrypt", "at.favre.lib", "bcrypt").versionRef(bcrypt)
             library("security-jwt", "com.auth0", "java-jwt").versionRef(jwt)
@@ -33,6 +34,7 @@ dependencyResolutionManagement {
             library("datasource-hikari", "com.zaxxer", "HikariCP").versionRef(hikari)
             library("datasource-fuel", "com.github.kittinunf.fuel", "fuel").versionRef(fuel)
             library("datasource-fuel-gson", "com.github.kittinunf.fuel", "fuel-gson").versionRef(fuel)
+            library("datasource-gson", "com.google.code.gson", "gson").versionRef(gson)
         }
 
         create("testWorkspace") {
