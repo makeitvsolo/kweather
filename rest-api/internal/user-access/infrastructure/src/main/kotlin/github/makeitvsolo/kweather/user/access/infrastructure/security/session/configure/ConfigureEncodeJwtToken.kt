@@ -1,18 +1,28 @@
 package github.makeitvsolo.kweather.user.access.infrastructure.security.session.configure
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.user.access.infrastructure.security.session.EncodeJwtToken
 import github.makeitvsolo.kweather.user.access.infrastructure.security.session.internal.BaseEncodeJwtToken
 
 import com.auth0.jwt.algorithms.Algorithm
 
-sealed interface EncodeJwtTokenConfigurationError {
+sealed interface EncodeJwtTokenConfigurationError : IntoThrowable {
 
-    data class InvalidAlgorithmError(private val details: String) : EncodeJwtTokenConfigurationError
+    data class InvalidAlgorithmError(private val details: String) : EncodeJwtTokenConfigurationError {
 
-    data class InvalidSecretKeyError(private val details: String) : EncodeJwtTokenConfigurationError
+        override fun intoThrowable(): Throwable = Throwable(details)
+    }
 
-    data class InvalidTimeToLiveError(private val details: String) : EncodeJwtTokenConfigurationError
+    data class InvalidSecretKeyError(private val details: String) : EncodeJwtTokenConfigurationError {
+
+        override fun intoThrowable(): Throwable = Throwable(details)
+    }
+
+    data class InvalidTimeToLiveError(private val details: String) : EncodeJwtTokenConfigurationError {
+
+        override fun intoThrowable(): Throwable = Throwable(details)
+    }
 }
 
 class ConfigureEncodeJwtToken internal constructor(
