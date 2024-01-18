@@ -1,5 +1,6 @@
 package github.makeitvsolo.kweather.weather.api.datasource.location.operation
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.core.mapping.Into
 import github.makeitvsolo.kweather.weather.domain.location.Location
@@ -10,7 +11,7 @@ interface MapSearchLocationErrorInto<out R> : Into<R> {
     fun fromInternalError(throwable: Throwable): R
 }
 
-sealed interface SearchLocationError {
+sealed interface SearchLocationError : IntoThrowable {
 
     fun <R, M : MapSearchLocationErrorInto<R>> into(map: M): R
 
@@ -18,12 +19,16 @@ sealed interface SearchLocationError {
 
         override fun <R, M : MapSearchLocationErrorInto<R>> into(map: M): R =
             map.fromNotFoundError(details)
+
+        override fun intoThrowable(): Throwable = Throwable(details)
     }
 
     data class InternalError(private val throwable: Throwable) : SearchLocationError {
 
         override fun <R, M : MapSearchLocationErrorInto<R>> into(map: M): R =
             map.fromInternalError(throwable)
+
+        override fun intoThrowable(): Throwable = throwable
     }
 }
 
