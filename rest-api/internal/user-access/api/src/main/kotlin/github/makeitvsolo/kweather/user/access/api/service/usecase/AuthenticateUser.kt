@@ -1,5 +1,6 @@
 package github.makeitvsolo.kweather.user.access.api.service.usecase
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.core.mapping.Into
 import github.makeitvsolo.kweather.user.access.api.security.session.MapDecodeTokenErrorInto
@@ -15,7 +16,7 @@ interface MapAuthenticateUserErrorInto<out R> : Into<R> {
     fun fromInternalError(throwable: Throwable): R
 }
 
-sealed interface AuthenticateUserError {
+sealed interface AuthenticateUserError : IntoThrowable {
 
     object FromDecodeTokenError : MapDecodeTokenErrorInto<AuthenticateUserError> {
 
@@ -32,12 +33,16 @@ sealed interface AuthenticateUserError {
 
         override fun <R, M : MapAuthenticateUserErrorInto<R>> into(map: M): R =
             map.fromInvalidTokenError(details)
+
+        override fun intoThrowable(): Throwable = Throwable(details)
     }
 
     data class InternalError(private val throwable: Throwable) : AuthenticateUserError {
 
         override fun <R, M : MapAuthenticateUserErrorInto<R>> into(map: M): R =
             map.fromInternalError(throwable)
+
+        override fun intoThrowable(): Throwable = throwable
     }
 }
 

@@ -1,5 +1,6 @@
 package github.makeitvsolo.kweather.user.access.api.service.usecase
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.core.mapping.Into
 import github.makeitvsolo.kweather.user.access.api.datasource.operation.MapSaveUserErrorInto
@@ -13,7 +14,7 @@ interface MapRegisterUserErrorInto<out R> : Into<R> {
     fun fromInternalError(throwable: Throwable): R
 }
 
-sealed interface RegisterUserError {
+sealed interface RegisterUserError : IntoThrowable {
 
     object FromSaveUserError : MapSaveUserErrorInto<RegisterUserError> {
 
@@ -30,12 +31,16 @@ sealed interface RegisterUserError {
 
         override fun <R, M : MapRegisterUserErrorInto<R>> into(map: M): R =
             map.fromConflictError(details)
+
+        override fun intoThrowable(): Throwable = Throwable(details)
     }
 
     data class InternalError(private val throwable: Throwable) : RegisterUserError {
 
         override fun <R, M : MapRegisterUserErrorInto<R>> into(map: M): R =
             map.fromInternalError(throwable)
+
+        override fun intoThrowable(): Throwable = throwable
     }
 }
 
