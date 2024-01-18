@@ -15,6 +15,7 @@ sealed class Result<T, E : IntoThrowable> {
     abstract val isError: Boolean
 
     abstract fun <U> andThen(map: (T) -> Result<U, E>): Result<U, E>
+    abstract fun <O : IntoThrowable> or(map: (E) -> Result<T, O>): Result<T, O>
 
     abstract fun ifOk(action: (T) -> Unit): Result<T, E>
     abstract fun ifError(action: (E) -> Unit): Result<T, E>
@@ -60,6 +61,8 @@ internal class Ok<T, E : IntoThrowable> internal constructor(
 
     override fun <U> andThen(map: (T) -> Result<U, E>): Result<U, E> = map(value)
 
+    override fun <O : IntoThrowable> or(map: (E) -> Result<T, O>): Result<T, O> = Ok(value)
+
     override fun ifOk(action: (T) -> Unit): Result<T, E> {
         action(value)
         return this
@@ -92,6 +95,8 @@ internal class Error<T, E : IntoThrowable> internal constructor(
     override fun <O : IntoThrowable> mapError(map: (E) -> O): Result<T, O> = Error(map(error))
 
     override fun <U> andThen(map: (T) -> Result<U, E>): Result<U, E> = Error(error)
+
+    override fun <O : IntoThrowable> or(map: (E) -> Result<T, O>): Result<T, O> = map(error)
 
     override fun ifOk(action: (T) -> Unit): Result<T, E> = this
 
