@@ -1,5 +1,6 @@
 package github.makeitvsolo.kweather.weather.infrastructure.datasource.location
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 
 import com.github.kittinunf.fuel.gson.responseObject
@@ -20,14 +21,12 @@ data class WeatherApiLocation(
     @SerializedName("url") val url: String
 )
 
-data class SearchByNameError(private val throwable: Throwable) {
+data class SearchByNameError(private val throwable: Throwable) : IntoThrowable {
 
-    fun intoThrowable(): Throwable = throwable
+    override fun intoThrowable(): Throwable = throwable
 }
 
-sealed interface SearchByCoordinatesError {
-
-    fun intoThrowable(): Throwable
+sealed interface SearchByCoordinatesError : IntoThrowable {
 
     data class NotFoundError(private val details: String) : SearchByCoordinatesError {
 

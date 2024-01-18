@@ -1,5 +1,6 @@
 package github.makeitvsolo.kweather.weather.infrastructure.datasource.location
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.datasource.location.operation.AddFavourite
 import github.makeitvsolo.kweather.weather.api.datasource.location.operation.AddFavouriteError
@@ -14,18 +15,24 @@ import javax.sql.DataSource
 
 data class Coordinates(val latitude: BigDecimal, val longitude: BigDecimal)
 
-data class ExistsFavouriteError(private val throwable: Throwable) {
+data class ExistsFavouriteError(private val throwable: Throwable) : IntoThrowable {
 
-    fun intoThrowable(): Throwable = throwable
+    override fun intoThrowable(): Throwable = throwable
 }
 
-data class CreateTableError internal constructor(private val throwable: Throwable)
+data class FindFavouriteCoordinatesError(private val throwable: Throwable) : IntoThrowable {
 
-data class DropTableError internal constructor(private val throwable: Throwable)
+    override fun intoThrowable(): Throwable = throwable
+}
 
-data class FindFavouriteCoordinatesError(private val throwable: Throwable) {
+data class CreateTableError internal constructor(private val throwable: Throwable) : IntoThrowable {
 
-    fun intoThrowable(): Throwable = throwable
+    override fun intoThrowable(): Throwable = throwable
+}
+
+data class DropTableError internal constructor(private val throwable: Throwable) : IntoThrowable {
+
+    override fun intoThrowable(): Throwable = throwable
 }
 
 class SqlLocationRepository internal constructor(

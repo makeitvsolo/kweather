@@ -1,5 +1,6 @@
 package github.makeitvsolo.kweather.weather.infrastructure.datasource.account
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.domain.account.Account
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.parameter.AccountParameters
@@ -9,23 +10,41 @@ import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.que
 import java.sql.SQLException
 import javax.sql.DataSource
 
-sealed interface SaveAccountError {
+sealed interface SaveAccountError : IntoThrowable {
 
-    data class ConflictError(private val details: String) : SaveAccountError
+    data class ConflictError(private val details: String) : SaveAccountError {
 
-    data class InternalError(private val throwable: Throwable) : SaveAccountError
+        override fun intoThrowable(): Throwable = Throwable(details)
+    }
+
+    data class InternalError(private val throwable: Throwable) : SaveAccountError {
+
+        override fun intoThrowable(): Throwable = throwable
+    }
 }
 
-sealed interface FindAccountError {
+sealed interface FindAccountError : IntoThrowable {
 
-    data class NotFoundError(private val details: String) : FindAccountError
+    data class NotFoundError(private val details: String) : FindAccountError {
 
-    data class InternalError(private val throwable: Throwable) : FindAccountError
+        override fun intoThrowable(): Throwable = Throwable(details)
+    }
+
+    data class InternalError(private val throwable: Throwable) : FindAccountError {
+
+        override fun intoThrowable(): Throwable = throwable
+    }
 }
 
-data class CreateTableError internal constructor(private val throwable: Throwable)
+data class CreateTableError internal constructor(private val throwable: Throwable) : IntoThrowable {
 
-data class DropTableError internal constructor(private val throwable: Throwable)
+    override fun intoThrowable(): Throwable = throwable
+}
+
+data class DropTableError internal constructor(private val throwable: Throwable) : IntoThrowable {
+
+    override fun intoThrowable(): Throwable = throwable
+}
 
 class SqlAccountRepository internal constructor(
     private val dataSource: DataSource
