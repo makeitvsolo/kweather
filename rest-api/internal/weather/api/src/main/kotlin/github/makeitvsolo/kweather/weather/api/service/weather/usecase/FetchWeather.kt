@@ -1,5 +1,6 @@
 package github.makeitvsolo.kweather.weather.api.service.weather.usecase
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.core.mapping.Into
 import github.makeitvsolo.kweather.weather.api.datasource.location.operation.MapFindFavouriteErrorInto
@@ -16,7 +17,7 @@ interface MapFetchWeatherErrorInto<out R> : Into<R> {
     fun fromInternalError(throwable: Throwable): R
 }
 
-sealed interface FetchWeatherError {
+sealed interface FetchWeatherError : IntoThrowable {
 
     object FromFindFavouriteError : MapFindFavouriteErrorInto<FetchWeatherError> {
 
@@ -42,12 +43,16 @@ sealed interface FetchWeatherError {
 
         override fun <R, M : MapFetchWeatherErrorInto<R>> into(map: M): R =
             map.fromNotFoundError(details)
+
+        override fun intoThrowable(): Throwable = Throwable(details)
     }
 
     data class InternalError(private val throwable: Throwable) : FetchWeatherError {
 
         override fun <R, M : MapFetchWeatherErrorInto<R>> into(map: M): R =
             map.fromInternalError(throwable)
+
+        override fun intoThrowable(): Throwable = throwable
     }
 }
 
