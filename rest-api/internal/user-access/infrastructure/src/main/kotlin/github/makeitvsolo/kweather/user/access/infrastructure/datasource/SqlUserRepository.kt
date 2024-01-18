@@ -1,5 +1,6 @@
 package github.makeitvsolo.kweather.user.access.infrastructure.datasource
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.user.access.api.datasource.UserRepository
 import github.makeitvsolo.kweather.user.access.api.datasource.operation.FindUserError
@@ -12,9 +13,15 @@ import github.makeitvsolo.kweather.user.access.infrastructure.datasource.query.U
 import java.sql.SQLException
 import javax.sql.DataSource
 
-data class CreateTableError internal constructor(private val throwable: Throwable)
+data class CreateTableError internal constructor(private val throwable: Throwable) : IntoThrowable {
 
-data class DropTableError internal constructor(private val throwable: Throwable)
+    override fun intoThrowable(): Throwable = throwable
+}
+
+data class DropTableError internal constructor(private val throwable: Throwable) : IntoThrowable {
+
+    override fun intoThrowable(): Throwable = throwable
+}
 
 class SqlUserRepository internal constructor(
     private val dataSource: DataSource

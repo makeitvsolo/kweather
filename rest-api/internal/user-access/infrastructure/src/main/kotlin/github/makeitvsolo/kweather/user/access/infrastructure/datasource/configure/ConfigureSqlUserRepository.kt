@@ -1,16 +1,22 @@
 package github.makeitvsolo.kweather.user.access.infrastructure.datasource.configure
 
+import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.SqlUserRepository
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 
-sealed interface SqlUserRepositoryConfigurationError {
+sealed interface SqlUserRepositoryConfigurationError : IntoThrowable {
 
-    data class DataSourceUrlError(private val details: String) : SqlUserRepositoryConfigurationError
+    data class DataSourceUrlError(private val details: String) : SqlUserRepositoryConfigurationError {
+        override fun intoThrowable(): Throwable = Throwable(details)
+    }
 
-    data class InvalidCredentialsError(private val details: String) : SqlUserRepositoryConfigurationError
+    data class InvalidCredentialsError(private val details: String) : SqlUserRepositoryConfigurationError {
+
+        override fun intoThrowable(): Throwable = Throwable(details)
+    }
 }
 
 class ConfigureSqlUserRepository internal constructor(
