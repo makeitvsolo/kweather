@@ -7,7 +7,7 @@ import github.makeitvsolo.kweather.user.access.api.datasource.user.error.SaveUse
 import github.makeitvsolo.kweather.user.access.domain.User
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.error.CreateTableError
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.error.TruncateTableError
-import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.parameter.UserParameters
+import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.data.UserParameters
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query.Defaults
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query.UserQuery
 
