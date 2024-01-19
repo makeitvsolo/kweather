@@ -1,15 +1,15 @@
-package github.makeitvsolo.kweather.weather.application.usecase.weather
+package github.makeitvsolo.kweather.weather.application.weather.usecase
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.datasource.location.LocationRepository
-import github.makeitvsolo.kweather.weather.api.datasource.location.operation.FindFavouriteError
+import github.makeitvsolo.kweather.weather.api.datasource.location.error.FindFavouriteError
 import github.makeitvsolo.kweather.weather.api.datasource.weather.WeatherRepository
-import github.makeitvsolo.kweather.weather.api.datasource.weather.operation.FindWeatherError
+import github.makeitvsolo.kweather.weather.api.datasource.weather.error.FindWeatherError
 import github.makeitvsolo.kweather.weather.api.service.weather.dto.LocationDto
 import github.makeitvsolo.kweather.weather.api.service.weather.dto.TemperatureDto
 import github.makeitvsolo.kweather.weather.api.service.weather.dto.WeatherDto
 import github.makeitvsolo.kweather.weather.api.service.weather.dto.WindDto
-import github.makeitvsolo.kweather.weather.api.service.weather.usecase.FetchWeatherError
+import github.makeitvsolo.kweather.weather.api.service.weather.error.FetchWeatherError
 import github.makeitvsolo.kweather.weather.api.service.weather.usecase.FetchWeatherPayload
 import github.makeitvsolo.kweather.weather.api.service.weather.usecase.FetchWeatherResponse
 import github.makeitvsolo.kweather.weather.application.ApplicationUnitTest

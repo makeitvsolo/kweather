@@ -1,9 +1,9 @@
-package github.makeitvsolo.kweather.weather.application.usecase.location
+package github.makeitvsolo.kweather.weather.application.location.usecase
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.datasource.location.LocationRepository
-import github.makeitvsolo.kweather.weather.api.datasource.location.operation.RemoveFavouriteError
-import github.makeitvsolo.kweather.weather.api.service.location.usecase.RemoveFromFavouritesError
+import github.makeitvsolo.kweather.weather.api.datasource.location.error.RemoveFavouriteError
+import github.makeitvsolo.kweather.weather.api.service.location.error.RemoveFromFavouritesError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.RemoveFromFavouritesPayload
 import github.makeitvsolo.kweather.weather.application.ApplicationUnitTest
 

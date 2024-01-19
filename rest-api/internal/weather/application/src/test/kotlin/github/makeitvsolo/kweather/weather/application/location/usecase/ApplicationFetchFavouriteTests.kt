@@ -1,11 +1,11 @@
-package github.makeitvsolo.kweather.weather.application.usecase.location
+package github.makeitvsolo.kweather.weather.application.location.usecase
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.datasource.location.LocationRepository
-import github.makeitvsolo.kweather.weather.api.datasource.location.operation.FindFavouriteError
+import github.makeitvsolo.kweather.weather.api.datasource.location.error.FindFavouriteError
 import github.makeitvsolo.kweather.weather.api.service.location.dto.LocationDto
+import github.makeitvsolo.kweather.weather.api.service.location.error.FetchFavouriteError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.FetchAllFavouritePayload
-import github.makeitvsolo.kweather.weather.api.service.location.usecase.FetchFavouriteError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.FetchFavouritePayload
 import github.makeitvsolo.kweather.weather.application.ApplicationUnitTest
 import github.makeitvsolo.kweather.weather.domain.location.Location
@@ -14,11 +14,11 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.kotlin.whenever
 
-import java.math.BigDecimal
-
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+
+import java.math.BigDecimal
 
 class ApplicationFetchFavouriteTests : ApplicationUnitTest() {
 

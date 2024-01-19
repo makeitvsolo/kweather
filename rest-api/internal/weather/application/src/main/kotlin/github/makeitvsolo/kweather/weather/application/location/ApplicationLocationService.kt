@@ -1,21 +1,21 @@
-package github.makeitvsolo.kweather.weather.application
+package github.makeitvsolo.kweather.weather.application.location
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.service.location.LocationService
+import github.makeitvsolo.kweather.weather.api.service.location.error.FetchFavouriteError
+import github.makeitvsolo.kweather.weather.api.service.location.error.RemoveFromFavouritesError
+import github.makeitvsolo.kweather.weather.api.service.location.error.SaveToFavouritesError
+import github.makeitvsolo.kweather.weather.api.service.location.error.SearchForLocationError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.FetchAllFavouritePayload
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.FetchAllFavouriteResponse
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.FetchFavourite
-import github.makeitvsolo.kweather.weather.api.service.location.usecase.FetchFavouriteError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.FetchFavouritePayload
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.FetchFavouriteResponse
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.RemoveFromFavourites
-import github.makeitvsolo.kweather.weather.api.service.location.usecase.RemoveFromFavouritesError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.RemoveFromFavouritesPayload
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.SaveToFavourites
-import github.makeitvsolo.kweather.weather.api.service.location.usecase.SaveToFavouritesError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.SaveToFavouritesPayload
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.SearchForLocation
-import github.makeitvsolo.kweather.weather.api.service.location.usecase.SearchForLocationError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.SearchForLocationPayload
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.SearchForLocationResponse
 

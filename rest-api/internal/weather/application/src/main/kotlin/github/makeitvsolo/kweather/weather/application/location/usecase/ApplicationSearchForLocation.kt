@@ -1,10 +1,10 @@
-package github.makeitvsolo.kweather.weather.application.usecase.location
+package github.makeitvsolo.kweather.weather.application.location.usecase
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.datasource.location.LocationRepository
 import github.makeitvsolo.kweather.weather.api.service.location.dto.LocationDto
+import github.makeitvsolo.kweather.weather.api.service.location.error.SearchForLocationError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.SearchForLocation
-import github.makeitvsolo.kweather.weather.api.service.location.usecase.SearchForLocationError
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.SearchForLocationPayload
 import github.makeitvsolo.kweather.weather.api.service.location.usecase.SearchForLocationResponse
 

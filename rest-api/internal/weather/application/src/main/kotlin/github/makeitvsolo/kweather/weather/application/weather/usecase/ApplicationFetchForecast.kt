@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.weather.application.usecase.weather
+package github.makeitvsolo.kweather.weather.application.weather.usecase
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.datasource.location.LocationRepository
@@ -6,8 +6,8 @@ import github.makeitvsolo.kweather.weather.api.datasource.weather.WeatherReposit
 import github.makeitvsolo.kweather.weather.api.service.weather.dto.DailyWeatherDto
 import github.makeitvsolo.kweather.weather.api.service.weather.dto.ForecastDto
 import github.makeitvsolo.kweather.weather.api.service.weather.dto.LocationDto
+import github.makeitvsolo.kweather.weather.api.service.weather.error.FetchForecastError
 import github.makeitvsolo.kweather.weather.api.service.weather.usecase.FetchForecast
-import github.makeitvsolo.kweather.weather.api.service.weather.usecase.FetchForecastError
 import github.makeitvsolo.kweather.weather.api.service.weather.usecase.FetchForecastPayload
 import github.makeitvsolo.kweather.weather.api.service.weather.usecase.FetchForecastResponse
 
