@@ -1,11 +1,11 @@
 package github.makeitvsolo.kweather.user.access.integration.test
 
-import github.makeitvsolo.kweather.user.access.infrastructure.datasource.SqlUserRepository
-import github.makeitvsolo.kweather.user.access.infrastructure.datasource.configure.ConfigureSqlUserRepository
-import github.makeitvsolo.kweather.user.access.infrastructure.security.hash.BcryptHash
-import github.makeitvsolo.kweather.user.access.infrastructure.security.hash.configure.ConfigureBcryptHash
-import github.makeitvsolo.kweather.user.access.infrastructure.security.session.EncodeJwtToken
-import github.makeitvsolo.kweather.user.access.infrastructure.security.session.configure.ConfigureEncodeJwtToken
+import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.SqlUserRepository
+import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.configure.ConfigureSqlUserRepository
+import github.makeitvsolo.kweather.user.access.infrastructure.security.hash.bcrypt.BcryptHash
+import github.makeitvsolo.kweather.user.access.infrastructure.security.hash.bcrypt.configure.ConfigureBcryptHash
+import github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.EncodeJwtToken
+import github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.configure.ConfigureEncodeJwtToken
 import github.makeitvsolo.kweather.user.access.infrastructure.unique.UniqueId
 
 import org.testcontainers.containers.GenericContainer

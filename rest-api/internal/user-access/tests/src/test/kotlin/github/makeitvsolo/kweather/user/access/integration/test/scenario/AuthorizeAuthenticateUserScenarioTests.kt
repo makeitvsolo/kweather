@@ -1,12 +1,12 @@
 package github.makeitvsolo.kweather.user.access.integration.test.scenario
 
-import github.makeitvsolo.kweather.user.access.api.service.dto.AccessTokenDto
-import github.makeitvsolo.kweather.user.access.api.service.dto.UserDto
-import github.makeitvsolo.kweather.user.access.api.service.usecase.AuthorizeUserError
-import github.makeitvsolo.kweather.user.access.application.usecase.ApplicationAuthenticateUser
-import github.makeitvsolo.kweather.user.access.application.usecase.ApplicationAuthorizeUser
-import github.makeitvsolo.kweather.user.access.application.usecase.ApplicationRefreshAccessToken
-import github.makeitvsolo.kweather.user.access.application.usecase.ApplicationRegisterUser
+import github.makeitvsolo.kweather.user.access.api.service.user.dto.AccessTokenDto
+import github.makeitvsolo.kweather.user.access.api.service.user.dto.UserDto
+import github.makeitvsolo.kweather.user.access.api.service.user.error.AuthorizeUserError
+import github.makeitvsolo.kweather.user.access.application.user.usecase.ApplicationAuthenticateUser
+import github.makeitvsolo.kweather.user.access.application.user.usecase.ApplicationAuthorizeUser
+import github.makeitvsolo.kweather.user.access.application.user.usecase.ApplicationRefreshAccessToken
+import github.makeitvsolo.kweather.user.access.application.user.usecase.ApplicationRegisterUser
 import github.makeitvsolo.kweather.user.access.integration.test.UserAccessIntegrationTest
 import org.junit.jupiter.api.MethodOrderer
 

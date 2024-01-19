@@ -1,9 +1,9 @@
 package github.makeitvsolo.kweather.user.access.integration.test.scenario
 
-import github.makeitvsolo.kweather.user.access.api.datasource.operation.FindUserError
-import github.makeitvsolo.kweather.user.access.api.service.usecase.RegisterUserError
-import github.makeitvsolo.kweather.user.access.api.service.usecase.RegisterUserPayload
-import github.makeitvsolo.kweather.user.access.application.usecase.ApplicationRegisterUser
+import github.makeitvsolo.kweather.user.access.api.datasource.user.error.FindUserError
+import github.makeitvsolo.kweather.user.access.api.service.user.error.RegisterUserError
+import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RegisterUserPayload
+import github.makeitvsolo.kweather.user.access.application.user.usecase.ApplicationRegisterUser
 import github.makeitvsolo.kweather.user.access.integration.test.UserAccessIntegrationTest
 import org.junit.jupiter.api.Nested
 
