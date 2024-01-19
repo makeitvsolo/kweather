@@ -3,7 +3,7 @@ package github.makeitvsolo.kweather.weather.api.service.location.error
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.mapping.Into
 import github.makeitvsolo.kweather.weather.api.datasource.location.error.MapSearchLocationErrorInto
-import github.makeitvsolo.kweather.weather.api.service.location.exception.LocationDoesNotExistsException
+import github.makeitvsolo.kweather.weather.api.service.location.exception.LocationServiceException
 
 interface MapSearchForLocationErrorInto<out R> : Into<R> {
 
@@ -29,7 +29,7 @@ sealed interface SearchForLocationError : IntoThrowable {
         override fun <R, M : MapSearchForLocationErrorInto<R>> into(map: M): R =
             map.fromNotFoundError(details)
 
-        override fun intoThrowable(): Throwable = LocationDoesNotExistsException(details)
+        override fun intoThrowable(): Throwable = LocationServiceException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : SearchForLocationError {

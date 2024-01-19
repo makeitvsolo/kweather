@@ -3,7 +3,7 @@ package github.makeitvsolo.kweather.weather.api.service.location.error
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.mapping.Into
 import github.makeitvsolo.kweather.weather.api.datasource.location.error.MapRemoveFavouriteErrorInto
-import github.makeitvsolo.kweather.weather.api.service.location.exception.LocationNotFoundInFavouritesException
+import github.makeitvsolo.kweather.weather.api.service.location.exception.LocationServiceException
 
 interface MapRemoveFromFavouritesErrorInto<out R> : Into<R> {
 
@@ -29,7 +29,7 @@ sealed interface RemoveFromFavouritesError : IntoThrowable {
         override fun <R, M : MapRemoveFromFavouritesErrorInto<R>> into(map: M): R =
             map.fromNotFoundError(details)
 
-        override fun intoThrowable(): Throwable = LocationNotFoundInFavouritesException(details)
+        override fun intoThrowable(): Throwable = LocationServiceException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : RemoveFromFavouritesError {

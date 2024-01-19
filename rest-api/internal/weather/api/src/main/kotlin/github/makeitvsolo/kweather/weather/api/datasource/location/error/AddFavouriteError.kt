@@ -1,7 +1,7 @@
 package github.makeitvsolo.kweather.weather.api.datasource.location.error
 
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
-import github.makeitvsolo.kweather.weather.api.datasource.location.exception.LocationAlreadyInFavouritesException
+import github.makeitvsolo.kweather.weather.api.datasource.location.exception.LocationRepositoryException
 
 interface MapAddFavouriteErrorInto<out R> {
 
@@ -19,7 +19,7 @@ sealed interface AddFavouriteError : IntoThrowable {
         override fun <R, M : MapAddFavouriteErrorInto<R>> into(map: M): R =
             map.fromNotFoundError(details)
 
-        override fun intoThrowable(): Throwable = Throwable(details)
+        override fun intoThrowable(): Throwable = LocationRepositoryException(details)
     }
 
     data class ConflictError(private val details: String) : AddFavouriteError {
@@ -27,7 +27,7 @@ sealed interface AddFavouriteError : IntoThrowable {
         override fun <R, M : MapAddFavouriteErrorInto<R>> into(map: M): R =
             map.fromConflictError(details)
 
-        override fun intoThrowable(): Throwable = LocationAlreadyInFavouritesException(details)
+        override fun intoThrowable(): Throwable = LocationRepositoryException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : AddFavouriteError {
