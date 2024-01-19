@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.weather.infrastructure.datasource.location.weatherapi.parameter
+package github.makeitvsolo.kweather.weather.infrastructure.datasource.location.weatherapi.data
 
 import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
