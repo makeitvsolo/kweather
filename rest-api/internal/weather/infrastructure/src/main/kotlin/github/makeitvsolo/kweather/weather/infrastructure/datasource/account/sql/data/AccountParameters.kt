@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.parameter
+package github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.data
 
 import github.makeitvsolo.kweather.weather.domain.account.MapAccountInto
 

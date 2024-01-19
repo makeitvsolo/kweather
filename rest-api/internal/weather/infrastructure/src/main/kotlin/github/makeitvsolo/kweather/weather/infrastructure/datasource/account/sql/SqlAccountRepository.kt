@@ -6,7 +6,7 @@ import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.error.FindAccountError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.error.SaveAccountError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.error.TruncateTableError
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.parameter.AccountParameters
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.data.AccountParameters
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.query.AccountQuery
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.query.Defaults
 
