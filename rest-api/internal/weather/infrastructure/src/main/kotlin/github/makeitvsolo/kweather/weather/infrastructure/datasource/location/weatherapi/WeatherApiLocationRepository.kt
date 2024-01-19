@@ -1,9 +1,9 @@
 package github.makeitvsolo.kweather.weather.infrastructure.datasource.location.weatherapi
 
 import github.makeitvsolo.kweather.core.error.handling.Result
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.weatherapi.data.WeatherApiLocation
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.weatherapi.error.SearchByCoordinatesError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.weatherapi.error.SearchByNameError
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.weatherapi.data.WeatherApiLocation
 
 import com.github.kittinunf.fuel.gson.responseObject
 import com.github.kittinunf.fuel.httpGet

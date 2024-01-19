@@ -2,11 +2,11 @@ package github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sq
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.domain.account.Account
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.data.AccountParameters
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.error.CreateTableError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.error.FindAccountError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.error.SaveAccountError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.error.TruncateTableError
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.data.AccountParameters
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.query.AccountQuery
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.query.Defaults
 

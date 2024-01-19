@@ -5,11 +5,11 @@ import github.makeitvsolo.kweather.weather.api.datasource.location.error.AddFavo
 import github.makeitvsolo.kweather.weather.api.datasource.location.error.RemoveFavouriteError
 import github.makeitvsolo.kweather.weather.api.datasource.location.operation.AddFavourite
 import github.makeitvsolo.kweather.weather.api.datasource.location.operation.RemoveFavourite
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.data.Coordinates
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.error.CreateTableError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.error.ExistsFavouriteError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.error.FindFavouriteCoordinatesError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.error.TruncateTableError
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.data.Coordinates
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.query.Defaults
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.query.LocationQuery
 
