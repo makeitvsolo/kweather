@@ -1,5 +1,5 @@
 package github.makeitvsolo.kweather.user.access.api.service.user.exception
 
-import github.makeitvsolo.kweather.core.error.handling.KWeatherException
+import github.makeitvsolo.kweather.core.error.handling.KweatherException
 
-class UserDoesNotExistsException(message: String) : KWeatherException(message)
+class UserDoesNotExistsException(message: String) : KweatherException(message)

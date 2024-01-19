@@ -1,6 +1,6 @@
 package github.makeitvsolo.kweather.core.error.handling
 
-abstract class KWeatherException : Throwable {
+abstract class KweatherException : Throwable {
 
     protected constructor() : super()
 

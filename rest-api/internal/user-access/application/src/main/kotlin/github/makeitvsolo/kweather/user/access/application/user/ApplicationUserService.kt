@@ -5,6 +5,7 @@ import github.makeitvsolo.kweather.user.access.api.service.user.UserService
 import github.makeitvsolo.kweather.user.access.api.service.user.error.AuthenticateUserError
 import github.makeitvsolo.kweather.user.access.api.service.user.error.AuthorizeUserError
 import github.makeitvsolo.kweather.user.access.api.service.user.error.RefreshAccessTokenError
+import github.makeitvsolo.kweather.user.access.api.service.user.error.RegisterUserError
 import github.makeitvsolo.kweather.user.access.api.service.user.usecase.AuthenticateUser
 import github.makeitvsolo.kweather.user.access.api.service.user.usecase.AuthenticateUserPayload
 import github.makeitvsolo.kweather.user.access.api.service.user.usecase.AuthenticateUserResponse
@@ -15,7 +16,6 @@ import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RefreshA
 import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RefreshAccessTokenPayload
 import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RefreshAccessTokenResponse
 import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RegisterUser
-import github.makeitvsolo.kweather.user.access.api.service.user.error.RegisterUserError
 import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RegisterUserPayload
 
 class ApplicationUserService(

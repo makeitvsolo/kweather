@@ -1,8 +1,8 @@
 package github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.configure
 
 import github.makeitvsolo.kweather.core.error.handling.Result
-import github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.EncodeJwtToken
 import github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.EncodeJwt
+import github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.EncodeJwtToken
 import github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.error.EncodeJwtTokenConfigurationError
 
 import com.auth0.jwt.algorithms.Algorithm
