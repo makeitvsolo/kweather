@@ -14,11 +14,11 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.kotlin.whenever
 
+import java.math.BigDecimal
+
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
-
-import java.math.BigDecimal
 
 class ApplicationFetchFavouriteTests : ApplicationUnitTest() {
 

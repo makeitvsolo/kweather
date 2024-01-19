@@ -1,8 +1,8 @@
 package github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo
 
 import github.makeitvsolo.kweather.core.error.handling.Result
-import github.makeitvsolo.kweather.weather.api.datasource.weather.operation.FindForecast
 import github.makeitvsolo.kweather.weather.api.datasource.weather.error.FindForecastError
+import github.makeitvsolo.kweather.weather.api.datasource.weather.operation.FindForecast
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.DailyWeather
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyHumidity
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyPrecipitation
