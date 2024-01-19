@@ -9,8 +9,8 @@ class BcryptHash internal constructor(
     private val salt: ByteArray
 ) : Hash {
 
-    override fun hash(password: String): String =
+    override fun hash(string: String): String =
         BCrypt.withDefaults()
-            .hash(cost, salt, password.toByteArray(Charsets.UTF_8))
+            .hash(cost, salt, string.toByteArray(Charsets.UTF_8))
             .toString(Charsets.UTF_8)
 }
