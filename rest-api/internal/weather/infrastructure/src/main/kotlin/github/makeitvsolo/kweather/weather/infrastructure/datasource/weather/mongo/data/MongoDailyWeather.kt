@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.parameter
+package github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data
 
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.MapDailyWeatherInto
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyHumidity

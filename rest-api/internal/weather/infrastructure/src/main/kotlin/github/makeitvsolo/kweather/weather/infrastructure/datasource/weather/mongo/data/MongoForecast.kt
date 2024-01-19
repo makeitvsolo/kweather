@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.parameter
+package github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data
 
 internal data class MongoForecast(
     val coordinates: MongoCoordinates,

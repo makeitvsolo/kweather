@@ -11,9 +11,9 @@ import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyWi
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.error.CreateCollectionError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.error.SaveForecastError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.error.TruncateCollectionError
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.parameter.MongoCoordinates
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.parameter.MongoDailyWeather
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.parameter.MongoForecast
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.MongoCoordinates
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.MongoDailyWeather
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.MongoForecast
 
 import com.google.gson.Gson
 import com.mongodb.BasicDBObject
