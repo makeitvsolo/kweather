@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.user.access.infrastructure.datasource.parameter
+package github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.parameter
 
 import github.makeitvsolo.kweather.user.access.domain.MapUserInto
 

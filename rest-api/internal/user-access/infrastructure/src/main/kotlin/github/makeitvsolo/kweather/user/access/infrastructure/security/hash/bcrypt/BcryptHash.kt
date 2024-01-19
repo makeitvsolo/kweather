@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.user.access.infrastructure.security.hash
+package github.makeitvsolo.kweather.user.access.infrastructure.security.hash.bcrypt
 
 import github.makeitvsolo.kweather.user.access.api.security.hash.Hash
 

@@ -1,23 +1,10 @@
-package github.makeitvsolo.kweather.user.access.infrastructure.security.hash.configure
+package github.makeitvsolo.kweather.user.access.infrastructure.security.hash.bcrypt.configure
 
-import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
-import github.makeitvsolo.kweather.user.access.infrastructure.security.hash.BcryptHash
+import github.makeitvsolo.kweather.user.access.infrastructure.security.hash.bcrypt.BcryptHash
+import github.makeitvsolo.kweather.user.access.infrastructure.security.hash.bcrypt.error.BcryptHashConfigurationError
 
 import at.favre.lib.crypto.bcrypt.BCrypt
-
-sealed interface BcryptHashConfigurationError : IntoThrowable {
-
-    data class InvalidCostError(private val details: String) : BcryptHashConfigurationError {
-
-        override fun intoThrowable(): Throwable = Throwable(details)
-    }
-
-    data class InvalidSaltError(private val details: String) : BcryptHashConfigurationError {
-
-        override fun intoThrowable(): Throwable = Throwable(details)
-    }
-}
 
 class ConfigureBcryptHash private constructor(
     private var cost: Int? = null,

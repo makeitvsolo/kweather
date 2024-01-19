@@ -1,8 +1,8 @@
-package github.makeitvsolo.kweather.user.access.infrastructure.security.session.internal
+package github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt
 
 import github.makeitvsolo.kweather.core.error.handling.Result
-import github.makeitvsolo.kweather.user.access.api.security.session.DecodeTokenError
 import github.makeitvsolo.kweather.user.access.api.security.session.TokenPayload
+import github.makeitvsolo.kweather.user.access.api.security.session.error.DecodeTokenError
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
@@ -10,7 +10,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException
 
 import java.time.Instant
 
-internal class BaseEncodeJwtToken internal constructor(
+class EncodeJwt internal constructor(
     private val algorithm: Algorithm,
     private val timeToLive: Long
 ) {

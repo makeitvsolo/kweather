@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.user.access.infrastructure.datasource.query
+package github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query
 
 internal object UserQuery {
 

@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.user.access.infrastructure.datasource.query
+package github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query
 
 internal object Defaults {
 
@@ -10,7 +10,7 @@ internal object Defaults {
             PRIMARY KEY (id)
         );
     """
-    const val DROP_TABLE = """
+    const val TRUNCATE_TABLE = """
         TRUNCATE users;
     """
 }

@@ -1,18 +1,17 @@
-package github.makeitvsolo.kweather.user.access.infrastructure.security.session
+package github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt
 
 import github.makeitvsolo.kweather.core.error.handling.Result
-import github.makeitvsolo.kweather.user.access.api.security.session.DecodeTokenError
 import github.makeitvsolo.kweather.user.access.api.security.session.EncodeToken
 import github.makeitvsolo.kweather.user.access.api.security.session.Token
 import github.makeitvsolo.kweather.user.access.api.security.session.TokenPayload
+import github.makeitvsolo.kweather.user.access.api.security.session.error.DecodeTokenError
 import github.makeitvsolo.kweather.user.access.domain.User
-import github.makeitvsolo.kweather.user.access.infrastructure.security.session.internal.BaseEncodeJwtToken
 
 import java.time.Instant
 
 class EncodeJwtToken internal constructor(
-    private val access: BaseEncodeJwtToken,
-    private val refresh: BaseEncodeJwtToken
+    private val access: EncodeJwt,
+    private val refresh: EncodeJwt
 ) : EncodeToken {
 
     fun encode(payload: TokenPayload): Token {

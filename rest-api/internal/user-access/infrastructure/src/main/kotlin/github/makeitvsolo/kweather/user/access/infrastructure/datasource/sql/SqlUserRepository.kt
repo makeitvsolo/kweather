@@ -1,27 +1,18 @@
-package github.makeitvsolo.kweather.user.access.infrastructure.datasource
+package github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql
 
-import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
-import github.makeitvsolo.kweather.user.access.api.datasource.UserRepository
-import github.makeitvsolo.kweather.user.access.api.datasource.operation.FindUserError
-import github.makeitvsolo.kweather.user.access.api.datasource.operation.SaveUserError
+import github.makeitvsolo.kweather.user.access.api.datasource.user.UserRepository
+import github.makeitvsolo.kweather.user.access.api.datasource.user.error.FindUserError
+import github.makeitvsolo.kweather.user.access.api.datasource.user.error.SaveUserError
 import github.makeitvsolo.kweather.user.access.domain.User
-import github.makeitvsolo.kweather.user.access.infrastructure.datasource.parameter.UserParameters
-import github.makeitvsolo.kweather.user.access.infrastructure.datasource.query.Defaults
-import github.makeitvsolo.kweather.user.access.infrastructure.datasource.query.UserQuery
+import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.error.CreateTableError
+import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.error.TruncateTableError
+import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.parameter.UserParameters
+import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query.Defaults
+import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query.UserQuery
 
 import java.sql.SQLException
 import javax.sql.DataSource
-
-data class CreateTableError internal constructor(private val throwable: Throwable) : IntoThrowable {
-
-    override fun intoThrowable(): Throwable = throwable
-}
-
-data class DropTableError internal constructor(private val throwable: Throwable) : IntoThrowable {
-
-    override fun intoThrowable(): Throwable = throwable
-}
 
 class SqlUserRepository internal constructor(
     private val dataSource: DataSource
@@ -104,10 +95,10 @@ class SqlUserRepository internal constructor(
         }
     }
 
-    fun dropTable(): Result<Unit, DropTableError> {
+    fun truncateTable(): Result<Unit, TruncateTableError> {
         try {
             dataSource.connection.use { connection ->
-                val statement = connection.prepareStatement(Defaults.DROP_TABLE)
+                val statement = connection.prepareStatement(Defaults.TRUNCATE_TABLE)
 
                 statement.use { sql ->
                     connection.autoCommit = false
@@ -120,7 +111,7 @@ class SqlUserRepository internal constructor(
 
             return Result.ok(Unit)
         } catch (ex: SQLException) {
-            return Result.error(DropTableError(ex))
+            return Result.error(TruncateTableError(ex))
         }
     }
 

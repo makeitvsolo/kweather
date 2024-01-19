@@ -1,31 +1,13 @@
-package github.makeitvsolo.kweather.user.access.infrastructure.security.session.configure
+package github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.configure
 
-import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.error.handling.Result
-import github.makeitvsolo.kweather.user.access.infrastructure.security.session.EncodeJwtToken
-import github.makeitvsolo.kweather.user.access.infrastructure.security.session.internal.BaseEncodeJwtToken
+import github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.EncodeJwtToken
+import github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.EncodeJwt
+import github.makeitvsolo.kweather.user.access.infrastructure.security.session.jwt.error.EncodeJwtTokenConfigurationError
 
 import com.auth0.jwt.algorithms.Algorithm
 
-sealed interface EncodeJwtTokenConfigurationError : IntoThrowable {
-
-    data class InvalidAlgorithmError(private val details: String) : EncodeJwtTokenConfigurationError {
-
-        override fun intoThrowable(): Throwable = Throwable(details)
-    }
-
-    data class InvalidSecretKeyError(private val details: String) : EncodeJwtTokenConfigurationError {
-
-        override fun intoThrowable(): Throwable = Throwable(details)
-    }
-
-    data class InvalidTimeToLiveError(private val details: String) : EncodeJwtTokenConfigurationError {
-
-        override fun intoThrowable(): Throwable = Throwable(details)
-    }
-}
-
-class ConfigureEncodeJwtToken internal constructor(
+class ConfigureEncodeJwtToken private constructor(
     private var accessConfiguration: TokenConfiguration = TokenConfiguration(),
     private var refreshConfiguration: TokenConfiguration = TokenConfiguration()
 ) {
@@ -115,8 +97,8 @@ class ConfigureEncodeJwtToken internal constructor(
 
         return Result.ok(
             EncodeJwtToken(
-                access = BaseEncodeJwtToken(accessAlgorithm, appliedAccessConfiguration.timeToLive),
-                refresh = BaseEncodeJwtToken(refreshAlgorithm, appliedRefreshConfiguration.timeToLive)
+                access = EncodeJwt(accessAlgorithm, appliedAccessConfiguration.timeToLive),
+                refresh = EncodeJwt(refreshAlgorithm, appliedRefreshConfiguration.timeToLive)
             )
         )
     }
