@@ -9,7 +9,7 @@ import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sq
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.error.ExistsFavouriteError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.error.FindFavouriteCoordinatesError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.error.TruncateTableError
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.parameter.Coordinates
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.data.Coordinates
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.query.Defaults
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.query.LocationQuery
 

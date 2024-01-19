@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.parameter
+package github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.data
 
 import java.math.BigDecimal
 
