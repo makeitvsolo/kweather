@@ -1,12 +1,12 @@
-package github.makeitvsolo.kweather.user.access.application.usecase
+package github.makeitvsolo.kweather.user.access.application.user.usecase
 
 import github.makeitvsolo.kweather.core.error.handling.Result
-import github.makeitvsolo.kweather.user.access.api.security.session.DecodeTokenError
 import github.makeitvsolo.kweather.user.access.api.security.session.EncodeToken
 import github.makeitvsolo.kweather.user.access.api.security.session.Token
-import github.makeitvsolo.kweather.user.access.api.service.usecase.RefreshAccessTokenError
-import github.makeitvsolo.kweather.user.access.api.service.usecase.RefreshAccessTokenPayload
-import github.makeitvsolo.kweather.user.access.api.service.usecase.RefreshAccessTokenResponse
+import github.makeitvsolo.kweather.user.access.api.security.session.error.DecodeTokenError
+import github.makeitvsolo.kweather.user.access.api.service.user.error.RefreshAccessTokenError
+import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RefreshAccessTokenPayload
+import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RefreshAccessTokenResponse
 import github.makeitvsolo.kweather.user.access.application.ApplicationUnitTest
 import org.mockito.InjectMocks
 

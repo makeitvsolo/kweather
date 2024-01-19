@@ -1,13 +1,13 @@
-package github.makeitvsolo.kweather.user.access.application.usecase
+package github.makeitvsolo.kweather.user.access.application.user.usecase
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.user.access.api.security.session.EncodeToken
 import github.makeitvsolo.kweather.user.access.api.security.session.Token
-import github.makeitvsolo.kweather.user.access.api.service.dto.ActiveUserDto
-import github.makeitvsolo.kweather.user.access.api.service.usecase.AuthenticateUser
-import github.makeitvsolo.kweather.user.access.api.service.usecase.AuthenticateUserError
-import github.makeitvsolo.kweather.user.access.api.service.usecase.AuthenticateUserPayload
-import github.makeitvsolo.kweather.user.access.api.service.usecase.AuthenticateUserResponse
+import github.makeitvsolo.kweather.user.access.api.service.user.dto.ActiveUserDto
+import github.makeitvsolo.kweather.user.access.api.service.user.error.AuthenticateUserError
+import github.makeitvsolo.kweather.user.access.api.service.user.usecase.AuthenticateUser
+import github.makeitvsolo.kweather.user.access.api.service.user.usecase.AuthenticateUserPayload
+import github.makeitvsolo.kweather.user.access.api.service.user.usecase.AuthenticateUserResponse
 
 class ApplicationAuthenticateUser(
     private val session: EncodeToken

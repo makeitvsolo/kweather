@@ -1,12 +1,12 @@
-package github.makeitvsolo.kweather.user.access.application.usecase
+package github.makeitvsolo.kweather.user.access.application.user.usecase
 
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.core.type.Unique
-import github.makeitvsolo.kweather.user.access.api.datasource.UserRepository
+import github.makeitvsolo.kweather.user.access.api.datasource.user.UserRepository
 import github.makeitvsolo.kweather.user.access.api.security.hash.Hash
-import github.makeitvsolo.kweather.user.access.api.service.usecase.RegisterUser
-import github.makeitvsolo.kweather.user.access.api.service.usecase.RegisterUserError
-import github.makeitvsolo.kweather.user.access.api.service.usecase.RegisterUserPayload
+import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RegisterUser
+import github.makeitvsolo.kweather.user.access.api.service.user.error.RegisterUserError
+import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RegisterUserPayload
 import github.makeitvsolo.kweather.user.access.domain.User
 
 class ApplicationRegisterUser(
