@@ -16,8 +16,8 @@ import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyHu
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyPrecipitation
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyTemperature
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyWind
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.weatherapi.parameter.WeatherApiForecast
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.weatherapi.parameter.WeatherApiWeather
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.weatherapi.data.WeatherApiForecast
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.weatherapi.data.WeatherApiWeather
 
 import com.github.kittinunf.fuel.gson.responseObject
 import com.github.kittinunf.fuel.httpGet
