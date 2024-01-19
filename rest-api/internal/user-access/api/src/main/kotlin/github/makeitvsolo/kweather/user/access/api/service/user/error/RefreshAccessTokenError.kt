@@ -3,7 +3,7 @@ package github.makeitvsolo.kweather.user.access.api.service.user.error
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.mapping.Into
 import github.makeitvsolo.kweather.user.access.api.security.session.error.MapDecodeTokenErrorInto
-import github.makeitvsolo.kweather.user.access.api.service.user.exception.InvalidTokenException
+import github.makeitvsolo.kweather.user.access.api.service.user.exception.UserServiceException
 
 interface MapRefreshAccessTokenErrorInto<out R> : Into<R> {
 
@@ -29,7 +29,7 @@ sealed interface RefreshAccessTokenError : IntoThrowable {
         override fun <R, M : MapRefreshAccessTokenErrorInto<R>> into(map: M): R =
             map.fromInvalidTokenError(details)
 
-        override fun intoThrowable(): Throwable = InvalidTokenException(details)
+        override fun intoThrowable(): Throwable = UserServiceException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : RefreshAccessTokenError {

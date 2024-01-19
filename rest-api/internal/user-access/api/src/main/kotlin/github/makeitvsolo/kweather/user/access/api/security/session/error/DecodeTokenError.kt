@@ -2,7 +2,7 @@ package github.makeitvsolo.kweather.user.access.api.security.session.error
 
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.mapping.Into
-import github.makeitvsolo.kweather.user.access.api.security.session.exception.InvalidTokenException
+import github.makeitvsolo.kweather.user.access.api.security.session.exception.DecodeTokenException
 
 interface MapDecodeTokenErrorInto<out R> : Into<R> {
 
@@ -19,7 +19,7 @@ sealed interface DecodeTokenError : IntoThrowable {
         override fun <R, M : MapDecodeTokenErrorInto<R>> into(map: M): R =
             map.fromInvalidTokenError(details)
 
-        override fun intoThrowable(): Throwable = InvalidTokenException(details)
+        override fun intoThrowable(): Throwable = DecodeTokenException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : DecodeTokenError {

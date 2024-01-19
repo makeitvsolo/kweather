@@ -3,7 +3,7 @@ package github.makeitvsolo.kweather.user.access.api.service.user.error
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.mapping.Into
 import github.makeitvsolo.kweather.user.access.api.datasource.user.error.MapSaveUserErrorInto
-import github.makeitvsolo.kweather.user.access.api.service.user.exception.UserAlreadyExistsException
+import github.makeitvsolo.kweather.user.access.api.service.user.exception.UserServiceException
 
 interface MapRegisterUserErrorInto<out R> : Into<R> {
 
@@ -29,7 +29,7 @@ sealed interface RegisterUserError : IntoThrowable {
         override fun <R, M : MapRegisterUserErrorInto<R>> into(map: M): R =
             map.fromConflictError(details)
 
-        override fun intoThrowable(): Throwable = UserAlreadyExistsException(details)
+        override fun intoThrowable(): Throwable = UserServiceException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : RegisterUserError {

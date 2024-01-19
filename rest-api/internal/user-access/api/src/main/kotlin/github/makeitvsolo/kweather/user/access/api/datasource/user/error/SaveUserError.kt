@@ -2,7 +2,7 @@ package github.makeitvsolo.kweather.user.access.api.datasource.user.error
 
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.mapping.Into
-import github.makeitvsolo.kweather.user.access.api.datasource.user.exception.UserAlreadyExistsException
+import github.makeitvsolo.kweather.user.access.api.datasource.user.exception.UserRepositoryException
 
 interface MapSaveUserErrorInto<out R> : Into<R> {
 
@@ -19,7 +19,7 @@ sealed interface SaveUserError : IntoThrowable {
         override fun <R, M : MapSaveUserErrorInto<R>> into(map: M): R =
             map.fromConflictError(details)
 
-        override fun intoThrowable(): Throwable = UserAlreadyExistsException(details)
+        override fun intoThrowable(): Throwable = UserRepositoryException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : SaveUserError {

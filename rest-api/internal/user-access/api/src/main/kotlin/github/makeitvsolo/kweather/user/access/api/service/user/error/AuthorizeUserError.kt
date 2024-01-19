@@ -3,8 +3,7 @@ package github.makeitvsolo.kweather.user.access.api.service.user.error
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 import github.makeitvsolo.kweather.core.mapping.Into
 import github.makeitvsolo.kweather.user.access.api.datasource.user.error.MapFindUserErrorInto
-import github.makeitvsolo.kweather.user.access.api.service.user.exception.InvalidCredentialsException
-import github.makeitvsolo.kweather.user.access.api.service.user.exception.UserDoesNotExistsException
+import github.makeitvsolo.kweather.user.access.api.service.user.exception.UserServiceException
 
 interface MapAuthorizeUserErrorInto<out R> : Into<R> {
 
@@ -31,7 +30,7 @@ sealed interface AuthorizeUserError : IntoThrowable {
         override fun <R, M : MapAuthorizeUserErrorInto<R>> into(map: M): R =
             map.fromNotFoundError(details)
 
-        override fun intoThrowable(): Throwable = UserDoesNotExistsException(details)
+        override fun intoThrowable(): Throwable = UserServiceException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : AuthorizeUserError {
@@ -47,6 +46,6 @@ sealed interface AuthorizeUserError : IntoThrowable {
         override fun <R, M : MapAuthorizeUserErrorInto<R>> into(map: M): R =
             map.fromInvalidCredentialsError(details)
 
-        override fun intoThrowable(): Throwable = InvalidCredentialsException(details)
+        override fun intoThrowable(): Throwable = UserServiceException(details)
     }
 }
