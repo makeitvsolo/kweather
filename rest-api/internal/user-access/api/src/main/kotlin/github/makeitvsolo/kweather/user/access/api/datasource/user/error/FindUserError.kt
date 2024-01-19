@@ -1,9 +1,8 @@
-package github.makeitvsolo.kweather.user.access.api.datasource.operation
+package github.makeitvsolo.kweather.user.access.api.datasource.user.error
 
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
-import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.core.mapping.Into
-import github.makeitvsolo.kweather.user.access.domain.User
+import github.makeitvsolo.kweather.user.access.api.datasource.user.exception.UserDoesNotExistsException
 
 interface MapFindUserErrorInto<out R> : Into<R> {
 
@@ -20,7 +19,7 @@ sealed interface FindUserError : IntoThrowable {
         override fun <R, M : MapFindUserErrorInto<R>> into(map: M): R =
             map.fromNotFoundError(details)
 
-        override fun intoThrowable(): Throwable = Throwable(details)
+        override fun intoThrowable(): Throwable = UserDoesNotExistsException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : FindUserError {
@@ -30,9 +29,4 @@ sealed interface FindUserError : IntoThrowable {
 
         override fun intoThrowable(): Throwable = throwable
     }
-}
-
-interface FindUser {
-
-    fun findByName(name: String): Result<User, FindUserError>
 }

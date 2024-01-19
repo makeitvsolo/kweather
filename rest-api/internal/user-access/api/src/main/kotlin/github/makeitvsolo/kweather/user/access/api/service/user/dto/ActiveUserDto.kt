@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.user.access.api.service.dto
+package github.makeitvsolo.kweather.user.access.api.service.user.dto
 
 import github.makeitvsolo.kweather.user.access.domain.MapUserInto
 

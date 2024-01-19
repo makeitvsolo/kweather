@@ -1,14 +1,9 @@
-package github.makeitvsolo.kweather.user.access.api.service.usecase
+package github.makeitvsolo.kweather.user.access.api.service.user.error
 
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
-import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.core.mapping.Into
-import github.makeitvsolo.kweather.user.access.api.security.session.MapDecodeTokenErrorInto
-import github.makeitvsolo.kweather.user.access.api.service.dto.AccessTokenDto
-import github.makeitvsolo.kweather.user.access.api.service.dto.ActiveUserDto
-
-typealias AuthenticateUserPayload = AccessTokenDto
-typealias AuthenticateUserResponse = ActiveUserDto
+import github.makeitvsolo.kweather.user.access.api.security.session.error.MapDecodeTokenErrorInto
+import github.makeitvsolo.kweather.user.access.api.service.user.exception.InvalidTokenException
 
 interface MapAuthenticateUserErrorInto<out R> : Into<R> {
 
@@ -34,7 +29,7 @@ sealed interface AuthenticateUserError : IntoThrowable {
         override fun <R, M : MapAuthenticateUserErrorInto<R>> into(map: M): R =
             map.fromInvalidTokenError(details)
 
-        override fun intoThrowable(): Throwable = Throwable(details)
+        override fun intoThrowable(): Throwable = InvalidTokenException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : AuthenticateUserError {
@@ -44,9 +39,4 @@ sealed interface AuthenticateUserError : IntoThrowable {
 
         override fun intoThrowable(): Throwable = throwable
     }
-}
-
-interface AuthenticateUser {
-
-    fun authenticate(payload: AuthenticateUserPayload): Result<AuthenticateUserResponse, AuthenticateUserError>
 }

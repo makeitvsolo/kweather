@@ -1,4 +1,4 @@
-package github.makeitvsolo.kweather.user.access.api.service.dto
+package github.makeitvsolo.kweather.user.access.api.service.user.dto
 
 data class AccessTokenDto(
     val access: String,

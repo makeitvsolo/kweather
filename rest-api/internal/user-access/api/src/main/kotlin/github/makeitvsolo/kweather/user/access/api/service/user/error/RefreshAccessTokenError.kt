@@ -1,13 +1,9 @@
-package github.makeitvsolo.kweather.user.access.api.service.usecase
+package github.makeitvsolo.kweather.user.access.api.service.user.error
 
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
-import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.core.mapping.Into
-import github.makeitvsolo.kweather.user.access.api.security.session.MapDecodeTokenErrorInto
-import github.makeitvsolo.kweather.user.access.api.service.dto.AccessTokenDto
-
-typealias RefreshAccessTokenPayload = AccessTokenDto
-typealias RefreshAccessTokenResponse = AccessTokenDto
+import github.makeitvsolo.kweather.user.access.api.security.session.error.MapDecodeTokenErrorInto
+import github.makeitvsolo.kweather.user.access.api.service.user.exception.InvalidTokenException
 
 interface MapRefreshAccessTokenErrorInto<out R> : Into<R> {
 
@@ -33,7 +29,7 @@ sealed interface RefreshAccessTokenError : IntoThrowable {
         override fun <R, M : MapRefreshAccessTokenErrorInto<R>> into(map: M): R =
             map.fromInvalidTokenError(details)
 
-        override fun intoThrowable(): Throwable = Throwable(details)
+        override fun intoThrowable(): Throwable = InvalidTokenException(details)
     }
 
     data class InternalError(private val throwable: Throwable) : RefreshAccessTokenError {
@@ -43,9 +39,4 @@ sealed interface RefreshAccessTokenError : IntoThrowable {
 
         override fun intoThrowable(): Throwable = throwable
     }
-}
-
-interface RefreshAccessToken {
-
-    fun refresh(payload: RefreshAccessTokenPayload): Result<RefreshAccessTokenResponse, RefreshAccessTokenError>
 }
