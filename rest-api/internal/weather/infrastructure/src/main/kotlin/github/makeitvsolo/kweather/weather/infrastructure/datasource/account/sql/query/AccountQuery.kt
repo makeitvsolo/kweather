@@ -12,13 +12,13 @@ internal object AccountQuery {
         """
     }
 
-    object FetchByName {
+    object FetchById {
 
-        const val NAME_PARAMETER = 1
+        const val ID_PARAMETER = 1
         const val SQL = """
             SELECT id, name
             FROM users
-            WHERE name = ?
+            WHERE id = ?
         """
     }
 }

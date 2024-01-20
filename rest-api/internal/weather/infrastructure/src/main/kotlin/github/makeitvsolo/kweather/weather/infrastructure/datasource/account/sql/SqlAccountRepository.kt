@@ -44,13 +44,13 @@ class SqlAccountRepository internal constructor(
         }
     }
 
-    fun findByName(name: String): Result<Account, FindAccountError> {
+    fun findById(id: String): Result<Account, FindAccountError> {
         try {
             dataSource.connection.use { connection ->
-                val statement = connection.prepareStatement(AccountQuery.FetchByName.SQL)
+                val statement = connection.prepareStatement(AccountQuery.FetchById.SQL)
 
                 statement.use { sql ->
-                    sql.setString(AccountQuery.FetchByName.NAME_PARAMETER, name)
+                    sql.setString(AccountQuery.FetchById.ID_PARAMETER, id)
 
                     sql.execute()
 
