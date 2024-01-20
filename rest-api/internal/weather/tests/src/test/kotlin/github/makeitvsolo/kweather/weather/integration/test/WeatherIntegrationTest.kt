@@ -2,6 +2,8 @@ package github.makeitvsolo.kweather.weather.integration.test
 
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.configure.ConfigureSqlAccountRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.base.configure.ConfigureBaseLocationRepository
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.configure.ConfigureSqlLocationRepository
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.weatherapi.configure.ConfigureWeatherApiLocationRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.cache.configure.ConfigureCachedWeatherRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.configure.ConfigureMongoForecastRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.weatherapi.configure.ConfigureWeatherApiWeatherRepository
@@ -15,7 +17,7 @@ import java.time.Duration
 @Testcontainers
 abstract class WeatherIntegrationTest {
 
-    protected val accountRepository = ConfigureSqlAccountRepository.with()
+    protected val sqlAccountRepository = ConfigureSqlAccountRepository.with()
         .datasourceUrl(
             "jdbc:postgresql://${postgresContainer.host}:${
                 postgresContainer.getMappedPort(
@@ -28,7 +30,7 @@ abstract class WeatherIntegrationTest {
         .configured()
         .unwrap()
 
-    protected val locationRepository = ConfigureBaseLocationRepository.with()
+    protected val sqlLocationRepository = ConfigureSqlLocationRepository.with()
         .datasourceUrl(
             "jdbc:postgresql://${postgresContainer.host}:${
                 postgresContainer.getMappedPort(
@@ -38,7 +40,17 @@ abstract class WeatherIntegrationTest {
         )
         .username(PostgresConfiguration.POSTGRES_USER)
         .password(PostgresConfiguration.POSTGRES_PASSWORD)
+        .configured()
+        .unwrap()
+
+    protected val weatherApiLocationRepository = ConfigureWeatherApiLocationRepository.with()
         .apiKey(WeatherApiConfiguration.WEATHER_API_KEY)
+        .configured()
+        .unwrap()
+
+    protected val locationRepository = ConfigureBaseLocationRepository.with()
+        .weatherApi(weatherApiLocationRepository)
+        .sql(sqlLocationRepository)
         .configured()
         .unwrap()
 
