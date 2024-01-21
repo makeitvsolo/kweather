@@ -1,10 +1,10 @@
 package github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.configure
 
-import com.mongodb.MongoClientSettings
 import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.MongoForecastRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.error.MongoForecastRepositoryConfigurationError
 
+import com.mongodb.MongoClientSettings
 import com.mongodb.MongoCredential
 import com.mongodb.ServerAddress
 import com.mongodb.client.MongoClients
