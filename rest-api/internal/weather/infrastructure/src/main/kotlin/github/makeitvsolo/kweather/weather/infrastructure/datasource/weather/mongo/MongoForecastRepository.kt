@@ -8,7 +8,6 @@ import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyHu
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyPrecipitation
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyTemperature
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyWind
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.MongoCoordinates
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.MongoDailyWeather
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.MongoForecast
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.error.CreateCollectionError
@@ -19,9 +18,12 @@ import com.google.gson.Gson
 import com.mongodb.BasicDBObject
 import com.mongodb.MongoException
 import com.mongodb.client.MongoDatabase
+import com.mongodb.client.model.Filters.and
+import com.mongodb.client.model.Filters.eq
 import org.bson.Document
 
 import java.math.BigDecimal
+import java.time.LocalDate
 
 class MongoForecastRepository internal constructor(
     private val datasource: MongoDatabase
@@ -36,7 +38,8 @@ class MongoForecastRepository internal constructor(
             val collection = datasource.getCollection(FORECAST_COLLECTION)
 
             val mongoForecast = MongoForecast(
-                MongoCoordinates(latitude, longitude),
+                latitude.toString(),
+                longitude.toString(),
                 forecast.map { it.into(MongoDailyWeather.FromDailyWeather) }
             )
 
@@ -53,11 +56,10 @@ class MongoForecastRepository internal constructor(
     ): Result<List<DailyWeather>, FindForecastError> {
         try {
             val collection = datasource.getCollection(FORECAST_COLLECTION)
-            val query = Document().also {
-                it["coordinates"] = MongoCoordinates(latitude, longitude)
-            }
 
-            val cursor = collection.find(query).cursor()
+            val cursor = collection.find(
+                and(eq("latitude", latitude.toString()), eq("longitude", longitude.toString()))
+            ).cursor()
 
             cursor.use { documents ->
                 if (documents.hasNext()) {
@@ -68,7 +70,7 @@ class MongoForecastRepository internal constructor(
                             DailyWeather.from(
                                 day.code,
                                 day.summary,
-                                day.date,
+                                LocalDate.parse(day.date),
                                 DailyTemperature(
                                     day.averageTemperature,
                                     day.maxTemperature,

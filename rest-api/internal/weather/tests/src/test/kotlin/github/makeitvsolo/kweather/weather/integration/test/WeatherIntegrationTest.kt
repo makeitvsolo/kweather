@@ -7,11 +7,13 @@ import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.we
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.cache.configure.ConfigureCachedWeatherRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.configure.ConfigureMongoForecastRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.weatherapi.configure.ConfigureWeatherApiWeatherRepository
+
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import org.testcontainers.utility.DockerImageName
+
 import java.time.Duration
 
 @Testcontainers
@@ -61,8 +63,10 @@ abstract class WeatherIntegrationTest {
         .unwrap()
 
     protected val mongoForecastRepository = ConfigureMongoForecastRepository.with()
-        .mongoUrl("mongodb://${mongoContainer.host}:${mongoContainer.getMappedPort(MongoConfiguration.MONGO_PORT)}")
-        .mongoDatabase(MongoConfiguration.MONGO_DATABASE)
+        .mongoHost(mongoContainer.host)
+        .mongoPort(mongoContainer.getMappedPort(MongoConfiguration.MONGO_PORT))
+        .database(MongoConfiguration.MONGO_DATABASE)
+        .authDatabase(MongoConfiguration.MONGO_AUTH_DATABASE)
         .username(MongoConfiguration.MONGO_USER)
         .password(MongoConfiguration.MONGO_PASSWORD)
         .configured()
@@ -96,10 +100,10 @@ abstract class WeatherIntegrationTest {
         const val MONGO_IMAGE = "mongo:4.0.10"
         const val MONGO_PORT = 27017
         const val MONGO_DATABASE = "test"
+        const val MONGO_AUTH_DATABASE = "admin"
         const val MONGO_USER = "testuser"
         const val MONGO_PASSWORD = "testpassword"
-        const val MONGO_START_COMMAND = "--replSet docker-rs"
-        const val MONGO_HEALTH_LOG_MESSAGE = ".*waiting for connections.*"
+        const val MONGO_HEALTH_LOG_MESSAGE = ".*waiting for connections.*\\s"
     }
 
     companion object {
@@ -123,9 +127,11 @@ abstract class WeatherIntegrationTest {
             DockerImageName.parse(MongoConfiguration.MONGO_IMAGE)
         )
             .withExposedPorts(MongoConfiguration.MONGO_PORT)
-            .withCommand(MongoConfiguration.MONGO_START_COMMAND)
+            .withEnv("MONGO_INITDB_DATABASE", MongoConfiguration.MONGO_DATABASE)
+            .withEnv("MONGO_INITDB_ROOT_USERNAME", MongoConfiguration.MONGO_USER)
+            .withEnv("MONGO_INITDB_ROOT_PASSWORD", MongoConfiguration.MONGO_PASSWORD)
             .waitingFor(
-                Wait.forLogMessage(MongoConfiguration.MONGO_HEALTH_LOG_MESSAGE, 1)
+                Wait.forLogMessage(MongoConfiguration.MONGO_HEALTH_LOG_MESSAGE, 2)
                     .withStartupTimeout(Duration.ofSeconds(60))
             )
     }

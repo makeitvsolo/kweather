@@ -10,7 +10,7 @@ import java.time.LocalDate
 internal data class MongoDailyWeather(
     val code: Int,
     val summary: String,
-    val date: LocalDate,
+    val date: String,
     val averageTemperature: Double,
     val maxTemperature: Double,
     val minTemperature: Double,
@@ -35,7 +35,7 @@ internal data class MongoDailyWeather(
             MongoDailyWeather(
                 code,
                 summary,
-                date,
+                date.toString(),
                 temperature.average,
                 temperature.max,
                 temperature.min,

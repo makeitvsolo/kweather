@@ -1,6 +1,7 @@
 package github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data
 
 internal data class MongoForecast(
-    val coordinates: MongoCoordinates,
+    val latitude: String,
+    val longitude: String,
     val days: List<MongoDailyWeather>
 )
