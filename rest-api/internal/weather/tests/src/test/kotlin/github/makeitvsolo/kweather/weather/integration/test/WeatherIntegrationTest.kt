@@ -46,7 +46,7 @@ abstract class WeatherIntegrationTest {
         .unwrap()
 
     protected val weatherApiLocationRepository = ConfigureWeatherApiLocationRepository.with()
-        .apiKey(WeatherApiConfiguration.WEATHER_API_KEY)
+        .apiKey(WeatherApiConfiguration.weatherApiKey)
         .configured()
         .unwrap()
 
@@ -57,7 +57,7 @@ abstract class WeatherIntegrationTest {
         .unwrap()
 
     protected val weatherApiWeatherRepository = ConfigureWeatherApiWeatherRepository.with()
-        .apiKey(WeatherApiConfiguration.WEATHER_API_KEY)
+        .apiKey(WeatherApiConfiguration.weatherApiKey)
         .forecastDays(WeatherApiConfiguration.FORECAST_DAYS)
         .configured()
         .unwrap()
@@ -91,8 +91,8 @@ abstract class WeatherIntegrationTest {
 
     object WeatherApiConfiguration {
 
-        const val WEATHER_API_KEY = "e99433e012be4f73ab9133834241101"
         const val FORECAST_DAYS = 2
+        val weatherApiKey = System.getenv("API_KEY") as String
     }
 
     object MongoConfiguration {
