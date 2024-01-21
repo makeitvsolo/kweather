@@ -1,5 +1,9 @@
 package github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query
 
+import github.makeitvsolo.kweather.user.access.domain.User
+
+import java.sql.ResultSet
+
 internal object UserQuery {
 
     object Insert {
@@ -23,3 +27,10 @@ internal object UserQuery {
         """
     }
 }
+
+internal fun ResultSet.intoUser(): User =
+    User.from(
+        getString("id"),
+        getString("name"),
+        getString("password")
+    )

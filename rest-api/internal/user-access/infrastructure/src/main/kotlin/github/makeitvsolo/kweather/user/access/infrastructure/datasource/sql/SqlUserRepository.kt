@@ -10,6 +10,7 @@ import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.err
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.error.TruncateTableError
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query.Defaults
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query.UserQuery
+import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.query.intoUser
 
 import java.sql.SQLException
 import javax.sql.DataSource
@@ -59,11 +60,7 @@ class SqlUserRepository internal constructor(
                     val cursor = sql.resultSet
                     if (cursor.next()) {
                         return Result.ok(
-                            User.from(
-                                cursor.getString("id"),
-                                cursor.getString("name"),
-                                cursor.getString("password")
-                            )
+                            cursor.intoUser()
                         )
                     }
                 }
