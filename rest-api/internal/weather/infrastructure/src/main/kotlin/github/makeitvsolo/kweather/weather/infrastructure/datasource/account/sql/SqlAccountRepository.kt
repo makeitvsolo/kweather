@@ -9,6 +9,7 @@ import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.error.TruncateTableError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.query.AccountQuery
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.query.Defaults
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.query.intoAccount
 
 import java.sql.SQLException
 import javax.sql.DataSource
@@ -57,10 +58,7 @@ class SqlAccountRepository internal constructor(
                     val cursor = sql.resultSet
                     if (cursor.next()) {
                         return Result.ok(
-                            Account.from(
-                                cursor.getString("id"),
-                                cursor.getString("name")
-                            )
+                            cursor.intoAccount()
                         )
                     }
                 }

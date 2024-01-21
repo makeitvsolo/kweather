@@ -1,5 +1,9 @@
 package github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.query
 
+import github.makeitvsolo.kweather.weather.domain.account.Account
+
+import java.sql.ResultSet
+
 internal object AccountQuery {
 
     object Insert {
@@ -22,3 +26,9 @@ internal object AccountQuery {
         """
     }
 }
+
+internal fun ResultSet.intoAccount(): Account =
+    Account.from(
+        getString("id"),
+        getString("name")
+    )
