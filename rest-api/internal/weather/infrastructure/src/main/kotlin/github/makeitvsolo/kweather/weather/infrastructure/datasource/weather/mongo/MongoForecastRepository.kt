@@ -4,26 +4,17 @@ import github.makeitvsolo.kweather.core.error.handling.Result
 import github.makeitvsolo.kweather.weather.api.datasource.weather.error.FindForecastError
 import github.makeitvsolo.kweather.weather.api.datasource.weather.operation.FindForecast
 import github.makeitvsolo.kweather.weather.domain.weather.forecast.DailyWeather
-import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyHumidity
-import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyPrecipitation
-import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyTemperature
-import github.makeitvsolo.kweather.weather.domain.weather.forecast.value.DailyWind
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.MongoDailyWeather
-import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.MongoForecast
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.ForecastDocument
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.data.intoForecast
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.error.CreateCollectionError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.error.SaveForecastError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.error.TruncateCollectionError
 
-import com.google.gson.Gson
 import com.mongodb.BasicDBObject
 import com.mongodb.MongoException
 import com.mongodb.client.MongoDatabase
-import com.mongodb.client.model.Filters.and
-import com.mongodb.client.model.Filters.eq
-import org.bson.Document
 
 import java.math.BigDecimal
-import java.time.LocalDate
 
 class MongoForecastRepository internal constructor(
     private val datasource: MongoDatabase
@@ -37,13 +28,8 @@ class MongoForecastRepository internal constructor(
         try {
             val collection = datasource.getCollection(FORECAST_COLLECTION)
 
-            val mongoForecast = MongoForecast(
-                latitude.toString(),
-                longitude.toString(),
-                forecast.map { it.into(MongoDailyWeather.FromDailyWeather) }
-            )
+            collection.insertOne(ForecastDocument.from(latitude, longitude, forecast))
 
-            collection.insertOne(Document.parse(Gson().toJson(mongoForecast)))
             return Result.ok(Unit)
         } catch (ex: MongoException) {
             return Result.error(SaveForecastError(ex))
@@ -58,33 +44,15 @@ class MongoForecastRepository internal constructor(
             val collection = datasource.getCollection(FORECAST_COLLECTION)
 
             val cursor = collection.find(
-                and(eq("latitude", latitude.toString()), eq("longitude", longitude.toString()))
+                ForecastDocument.fetchByCoordinates(latitude, longitude)
             ).cursor()
 
             cursor.use { documents ->
                 if (documents.hasNext()) {
-                    val mongoForecast = Gson().fromJson(documents.next().toJson(), MongoForecast::class.java)
+                    val document = documents.next()
 
                     return Result.ok(
-                        mongoForecast.days.map { day ->
-                            DailyWeather.from(
-                                day.code,
-                                day.summary,
-                                LocalDate.parse(day.date),
-                                DailyTemperature(
-                                    day.averageTemperature,
-                                    day.maxTemperature,
-                                    day.minTemperature
-                                ),
-                                DailyWind(day.wind),
-                                DailyHumidity(day.humidity),
-                                DailyPrecipitation(
-                                    day.precipitation,
-                                    day.rainChance,
-                                    day.snowChance
-                                )
-                            )
-                        }
+                        document.intoForecast()
                     )
                 }
 
@@ -98,6 +66,7 @@ class MongoForecastRepository internal constructor(
     fun createCollection(): Result<Unit, CreateCollectionError> {
         try {
             datasource.createCollection(FORECAST_COLLECTION)
+
             return Result.ok(Unit)
         } catch (ex: MongoException) {
             return Result.error(CreateCollectionError(ex))
