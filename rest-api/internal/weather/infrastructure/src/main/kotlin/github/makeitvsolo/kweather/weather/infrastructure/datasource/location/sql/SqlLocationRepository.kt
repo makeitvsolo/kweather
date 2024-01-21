@@ -12,6 +12,8 @@ import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sq
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.error.TruncateTableError
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.query.Defaults
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.query.LocationQuery
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.query.intoCoordinates
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.query.isExists
 
 import java.math.BigDecimal
 import java.sql.SQLException
@@ -106,7 +108,9 @@ class SqlLocationRepository internal constructor(
 
                     val cursor = sql.resultSet
                     if (cursor.next()) {
-                        return Result.ok(cursor.getBoolean("exists"))
+                        return Result.ok(
+                            cursor.isExists()
+                        )
                     }
                 }
             }
@@ -131,10 +135,7 @@ class SqlLocationRepository internal constructor(
                     val coordinates: MutableList<Coordinates> = mutableListOf()
                     while (cursor.next()) {
                         coordinates.add(
-                            Coordinates(
-                                cursor.getBigDecimal("latitude"),
-                                cursor.getBigDecimal("longitude")
-                            )
+                            cursor.intoCoordinates()
                         )
                     }
 

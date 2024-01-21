@@ -1,5 +1,9 @@
 package github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.query
 
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.data.Coordinates
+
+import java.sql.ResultSet
+
 internal object LocationQuery {
 
     object Insert {
@@ -50,3 +54,12 @@ internal object LocationQuery {
         """
     }
 }
+
+internal fun ResultSet.isExists(): Boolean =
+    getBoolean("exists")
+
+internal fun ResultSet.intoCoordinates(): Coordinates =
+    Coordinates(
+        getBigDecimal("latitude"),
+        getBigDecimal("longitude")
+    )
