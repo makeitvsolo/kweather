@@ -1,5 +1,7 @@
 rootProject.name = "kweather-api"
 
+include("boot")
+
 include("internal:core")
 
 include("internal:weather")
@@ -27,8 +29,6 @@ dependencyResolutionManagement {
             val mongo = version("mongo", "4.11.1")
             val fuel = version("fuel", "2.3.1")
             val gson = version("gson", "2.8.5")
-
-
 
             library("security-bcrypt", "at.favre.lib", "bcrypt").versionRef(bcrypt)
             library("security-jwt", "com.auth0", "java-jwt").versionRef(jwt)
