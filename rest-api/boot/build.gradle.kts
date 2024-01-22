@@ -12,4 +12,7 @@ dependencies {
     implementation(project(":internal:weather:api"))
     implementation(project(":internal:weather:application"))
     implementation(project(":internal:weather:infrastructure"))
+
+    implementation(boot.spring.web)
+    implementation(boot.spring.validation)
 }

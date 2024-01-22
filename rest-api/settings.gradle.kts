@@ -20,6 +20,15 @@ include("internal:user-access:tests")
 
 dependencyResolutionManagement {
     versionCatalogs {
+        create("boot") {
+            val spring = version("spirng", "3.1.5")
+
+            library("spring-web", "org.springframework.boot", "spring-boot-starter-web").versionRef(spring)
+            library("spring-validation", "org.springframework.boot", "spring-boot-starter-validation").versionRef(
+                spring
+            )
+        }
+
         create("workspace") {
             val bcrypt = version("bcrypt", "0.10.2")
             val jwt = version("jwt", "4.4.0")
