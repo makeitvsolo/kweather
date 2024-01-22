@@ -2,26 +2,9 @@ package github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mo
 
 import github.makeitvsolo.kweather.core.error.handling.IntoThrowable
 
-sealed interface MongoForecastRepositoryConfigurationError : IntoThrowable {
+data class MongoForecastRepositoryConfigurationError internal constructor(
+    private val details: String
+) : IntoThrowable {
 
-    data class MongoUrlError internal constructor(
-        private val details: String
-    ) : MongoForecastRepositoryConfigurationError {
-
-        override fun intoThrowable(): Throwable = IllegalArgumentException(details)
-    }
-
-    data class MongoDatabaseError internal constructor(
-        private val details: String
-    ) : MongoForecastRepositoryConfigurationError {
-
-        override fun intoThrowable(): Throwable = IllegalArgumentException(details)
-    }
-
-    data class InvalidCredentialsError internal constructor(
-        private val details: String
-    ) : MongoForecastRepositoryConfigurationError {
-
-        override fun intoThrowable(): Throwable = IllegalArgumentException(details)
-    }
+    override fun intoThrowable(): Throwable = IllegalArgumentException(details)
 }
