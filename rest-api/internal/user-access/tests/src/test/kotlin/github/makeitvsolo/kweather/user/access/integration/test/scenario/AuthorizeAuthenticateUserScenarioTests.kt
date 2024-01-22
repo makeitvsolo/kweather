@@ -1,6 +1,7 @@
 package github.makeitvsolo.kweather.user.access.integration.test.scenario
 
 import github.makeitvsolo.kweather.user.access.api.service.user.dto.AccessTokenDto
+import github.makeitvsolo.kweather.user.access.api.service.user.dto.TokenDto
 import github.makeitvsolo.kweather.user.access.api.service.user.dto.UserDto
 import github.makeitvsolo.kweather.user.access.api.service.user.error.AuthorizeUserError
 import github.makeitvsolo.kweather.user.access.application.user.usecase.ApplicationAuthenticateUser
@@ -8,11 +9,12 @@ import github.makeitvsolo.kweather.user.access.application.user.usecase.Applicat
 import github.makeitvsolo.kweather.user.access.application.user.usecase.ApplicationRefreshAccessToken
 import github.makeitvsolo.kweather.user.access.application.user.usecase.ApplicationRegisterUser
 import github.makeitvsolo.kweather.user.access.integration.test.UserAccessIntegrationTest
-import org.junit.jupiter.api.MethodOrderer
 
+import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.TestMethodOrder
+
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -86,7 +88,7 @@ class AuthorizeAuthenticateUserScenarioTests : UserAccessIntegrationTest() {
             @Test
             @Order(1)
             fun `user can be authenticated`() {
-                val result = authenticateUsecase.authenticate(token)
+                val result = authenticateUsecase.authenticate(TokenDto(token.access))
 
                 val activeUser = result.unwrap()
 
@@ -97,7 +99,7 @@ class AuthorizeAuthenticateUserScenarioTests : UserAccessIntegrationTest() {
             @Test
             @Order(2)
             fun `session can be refreshed`() {
-                val result = refreshSessionUsecase.refresh(token)
+                val result = refreshSessionUsecase.refresh(TokenDto(token.refresh))
 
                 assertTrue(result.isOk)
             }
