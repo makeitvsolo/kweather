@@ -17,6 +17,7 @@ import github.makeitvsolo.kweather.user.access.domain.User
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.kotlin.whenever
+
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

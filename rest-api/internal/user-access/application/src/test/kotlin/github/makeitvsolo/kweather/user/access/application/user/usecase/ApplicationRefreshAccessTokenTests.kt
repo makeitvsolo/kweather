@@ -8,18 +8,17 @@ import github.makeitvsolo.kweather.user.access.api.service.user.error.RefreshAcc
 import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RefreshAccessTokenPayload
 import github.makeitvsolo.kweather.user.access.api.service.user.usecase.RefreshAccessTokenResponse
 import github.makeitvsolo.kweather.user.access.application.ApplicationUnitTest
-import org.mockito.InjectMocks
 
+import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.kotlin.whenever
+
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ApplicationRefreshAccessTokenTests : ApplicationUnitTest() {
 
-    private val token: Token = Token("access token", "refresh token")
-    private val invalidToken: Token = Token("invalid access token", "invalid refresh token")
     private val refreshedToken: Token = Token("refreshed access token", "refreshed refresh token")
 
     @Mock
@@ -30,10 +29,10 @@ class ApplicationRefreshAccessTokenTests : ApplicationUnitTest() {
 
     @Test
     fun `refresh returns updated access token`() {
-        val payload = RefreshAccessTokenPayload("access token", "refresh token")
+        val payload = RefreshAccessTokenPayload("refresh token")
         val expected = RefreshAccessTokenResponse("refreshed access token", "refreshed refresh token")
 
-        whenever(session.refresh(token))
+        whenever(session.refresh(payload.token))
             .thenReturn(Result.ok(refreshedToken))
 
         val result = usecase.refresh(payload)
@@ -44,11 +43,11 @@ class ApplicationRefreshAccessTokenTests : ApplicationUnitTest() {
 
     @Test
     fun `refresh returns invalid token error when refresh token invalid`() {
-        val payload = RefreshAccessTokenPayload("invalid access token", "invalid refresh token")
+        val payload = RefreshAccessTokenPayload("invalid refresh token")
         val errorMessage = "invalid token"
         val expected = RefreshAccessTokenError.InvalidTokenError(errorMessage)
 
-        whenever(session.refresh(invalidToken))
+        whenever(session.refresh(payload.token))
             .thenReturn(Result.error(DecodeTokenError.InvalidTokenError(errorMessage)))
 
         val result = usecase.refresh(payload)
@@ -59,11 +58,11 @@ class ApplicationRefreshAccessTokenTests : ApplicationUnitTest() {
 
     @Test
     fun `refresh returns internal error`() {
-        val payload = RefreshAccessTokenPayload("access token", "refresh token")
+        val payload = RefreshAccessTokenPayload("refresh token")
         val exception = Throwable("internal error")
         val expected = RefreshAccessTokenError.InternalError(exception)
 
-        whenever(session.refresh(token))
+        whenever(session.refresh(payload.token))
             .thenReturn(Result.error(DecodeTokenError.InternalError(exception)))
 
         val result = usecase.refresh(payload)
