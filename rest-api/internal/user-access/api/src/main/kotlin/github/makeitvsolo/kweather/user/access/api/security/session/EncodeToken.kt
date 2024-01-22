@@ -29,7 +29,7 @@ data class TokenPayload(
 interface EncodeToken {
 
     fun encode(user: User): Token
-    fun refresh(token: Token): Result<Token, DecodeTokenError>
+    fun refresh(token: String): Result<Token, DecodeTokenError>
 
-    fun decode(token: Token): Result<TokenPayload, DecodeTokenError>
+    fun decode(token: String): Result<TokenPayload, DecodeTokenError>
 }
