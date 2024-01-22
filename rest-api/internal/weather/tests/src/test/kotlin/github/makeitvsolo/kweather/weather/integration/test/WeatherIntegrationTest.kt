@@ -1,5 +1,7 @@
 package github.makeitvsolo.kweather.weather.integration.test
 
+import github.makeitvsolo.kweather.weather.infrastructure.configure.mongo.ConfigureMongoDatasource
+import github.makeitvsolo.kweather.weather.infrastructure.configure.sql.ConfigureJdbcDatasource
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.account.sql.configure.ConfigureSqlAccountRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.base.configure.ConfigureBaseLocationRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.configure.ConfigureSqlLocationRepository
@@ -19,8 +21,8 @@ import java.time.Duration
 @Testcontainers
 abstract class WeatherIntegrationTest {
 
-    protected val sqlAccountRepository = ConfigureSqlAccountRepository.with()
-        .datasourceUrl(
+    private val jdbcDatasource = ConfigureJdbcDatasource.with()
+        .url(
             "jdbc:postgresql://${postgresContainer.host}:${
                 postgresContainer.getMappedPort(
                     PostgresConfiguration.POSTGRES_PORT
@@ -32,16 +34,23 @@ abstract class WeatherIntegrationTest {
         .configured()
         .unwrap()
 
+    private val mongoDatasource = ConfigureMongoDatasource.with()
+        .host(mongoContainer.host)
+        .port(mongoContainer.getMappedPort(MongoConfiguration.MONGO_PORT))
+        .database(MongoConfiguration.MONGO_DATABASE)
+        .authDatabase(MongoConfiguration.MONGO_AUTH_DATABASE)
+        .username(MongoConfiguration.MONGO_USER)
+        .password(MongoConfiguration.MONGO_PASSWORD)
+        .configured()
+        .unwrap()
+
+    protected val sqlAccountRepository = ConfigureSqlAccountRepository.with()
+        .datasource(jdbcDatasource)
+        .configured()
+        .unwrap()
+
     protected val sqlLocationRepository = ConfigureSqlLocationRepository.with()
-        .datasourceUrl(
-            "jdbc:postgresql://${postgresContainer.host}:${
-                postgresContainer.getMappedPort(
-                    PostgresConfiguration.POSTGRES_PORT
-                )
-            }/${PostgresConfiguration.POSTGRES_DATABASE}"
-        )
-        .username(PostgresConfiguration.POSTGRES_USER)
-        .password(PostgresConfiguration.POSTGRES_PASSWORD)
+        .datasource(jdbcDatasource)
         .configured()
         .unwrap()
 
@@ -63,12 +72,7 @@ abstract class WeatherIntegrationTest {
         .unwrap()
 
     protected val mongoForecastRepository = ConfigureMongoForecastRepository.with()
-        .mongoHost(mongoContainer.host)
-        .mongoPort(mongoContainer.getMappedPort(MongoConfiguration.MONGO_PORT))
-        .database(MongoConfiguration.MONGO_DATABASE)
-        .authDatabase(MongoConfiguration.MONGO_AUTH_DATABASE)
-        .username(MongoConfiguration.MONGO_USER)
-        .password(MongoConfiguration.MONGO_PASSWORD)
+        .datasource(mongoDatasource)
         .configured()
         .unwrap()
 
