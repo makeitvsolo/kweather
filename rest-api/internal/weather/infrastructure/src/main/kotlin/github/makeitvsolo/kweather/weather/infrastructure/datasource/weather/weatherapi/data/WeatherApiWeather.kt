@@ -38,6 +38,6 @@ internal data class WeatherApiWeather(
 
     companion object {
 
-        private const val DATETIME_FORMAT = "yyyy-MM-dd HH:mm"
+        private const val DATETIME_FORMAT = "yyyy-MM-dd H[H]:mm"
     }
 }
