@@ -26,11 +26,11 @@ class EncodeJwtToken internal constructor(
     override fun encode(user: User): Token =
         encode(user.into(TokenPayload.FromUser))
 
-    override fun decode(token: Token): Result<TokenPayload, DecodeTokenError> =
-        access.decode(token.access)
+    override fun decode(token: String): Result<TokenPayload, DecodeTokenError> =
+        access.decode(token)
 
-    override fun refresh(token: Token): Result<Token, DecodeTokenError> =
-        refresh.decode(token.refresh).map { payload ->
+    override fun refresh(token: String): Result<Token, DecodeTokenError> =
+        refresh.decode(token).map { payload ->
             encode(payload)
         }
 }
