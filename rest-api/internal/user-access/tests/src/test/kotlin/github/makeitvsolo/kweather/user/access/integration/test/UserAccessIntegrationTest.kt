@@ -1,5 +1,6 @@
 package github.makeitvsolo.kweather.user.access.integration.test
 
+import github.makeitvsolo.kweather.user.access.infrastructure.configure.sql.ConfigureJdbcDatasource
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.SqlUserRepository
 import github.makeitvsolo.kweather.user.access.infrastructure.datasource.sql.configure.ConfigureSqlUserRepository
 import github.makeitvsolo.kweather.user.access.infrastructure.security.hash.bcrypt.BcryptHash
@@ -18,6 +19,19 @@ import java.time.Duration
 
 @Testcontainers
 abstract class UserAccessIntegrationTest {
+
+    private val datasource = ConfigureJdbcDatasource.with()
+        .url(
+            "jdbc:postgresql://${postgresContainer.host}:${
+                postgresContainer.getMappedPort(
+                    PostgresConfiguration.POSTGRES_PORT
+                )
+            }/${PostgresConfiguration.POSTGRES_DATABASE}"
+        )
+        .username(PostgresConfiguration.POSTGRES_USER)
+        .password(PostgresConfiguration.POSTGRES_PASSWORD)
+        .configured()
+        .unwrap()
 
     protected val unique: UniqueId = UniqueId()
 
@@ -38,15 +52,7 @@ abstract class UserAccessIntegrationTest {
         .unwrap()
 
     protected val repository: SqlUserRepository = ConfigureSqlUserRepository.with()
-        .datasourceUrl(
-            "jdbc:postgresql://${postgresContainer.host}:${
-                postgresContainer.getMappedPort(
-                    PostgresConfiguration.POSTGRES_PORT
-                )
-            }/${PostgresConfiguration.POSTGRES_DATABASE}"
-        )
-        .username(PostgresConfiguration.POSTGRES_USER)
-        .password(PostgresConfiguration.POSTGRES_PASSWORD)
+        .datasource(datasource)
         .configured()
         .unwrap()
 
