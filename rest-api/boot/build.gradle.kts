@@ -15,4 +15,5 @@ dependencies {
 
     implementation(boot.spring.web)
     implementation(boot.spring.validation)
+    implementation(boot.jackson.kotlin)
 }

@@ -22,10 +22,15 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("boot") {
             val spring = version("spirng", "3.1.5")
+            val jackson = version("jackson", "2.16.1")
 
             library("spring-web", "org.springframework.boot", "spring-boot-starter-web").versionRef(spring)
             library("spring-validation", "org.springframework.boot", "spring-boot-starter-validation").versionRef(
                 spring
+            )
+
+            library("jackson-kotlin", "com.fasterxml.jackson.module", "jackson-module-kotlin").versionRef(
+                jackson
             )
         }
 
