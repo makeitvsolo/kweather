@@ -14,14 +14,11 @@ open class CleanCacheSchedule(
     @Scheduled(cron = "\${schedule.cache-clean.cron.expression}", zone = "\${schedule.cache-clean.cron.zone}")
     open fun cleanCache() {
         log.info("start cleaning cache...")
-        val result = repository.cleanCache()
 
-        if (result.isError) {
-            log.info("clean cache error: ${result.unwrapError()}")
-        }
-
-        if (result.isOk) {
+        repository.cleanCache().ifOk {
             log.info("cache cleaned successfully")
+        }.ifError { error ->
+            log.info("clean cache error: $error")
         }
     }
 
