@@ -9,6 +9,12 @@ web:
     allowed-headers: "Access-Control-Allow-Origin,Access-Control-Allow-Origin,Accept,Accept-Language,Content-Type,Content-Length,Cookie"
     allowed-methods: "GET,POST,PATCH,PUT,DELETE,OPTIONS,HEAD"
 
+schedule:
+  cache-clean:
+    cron:
+      expression: "0 0 12 * * ?"
+      zone: "Europe/Moscow"
+
 encoding:
   cost: 6
   salt: supersecret_salt
