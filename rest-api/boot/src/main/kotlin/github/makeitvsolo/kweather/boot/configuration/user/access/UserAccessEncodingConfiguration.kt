@@ -14,7 +14,7 @@ open class UserAccessEncodingConfiguration(env: Environment) {
     private val salt: String = env.getProperty("encoding.salt") ?: ""
 
     @Bean
-    fun hash(): Hash =
+    open fun hash(): Hash =
         ConfigureBcryptHash.with()
             .cost(cost)
             .salt(salt.toByteArray())

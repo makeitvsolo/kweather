@@ -19,31 +19,31 @@ import org.springframework.context.annotation.Configuration
 open class LocationServiceConfiguration {
 
     @Bean
-    fun fetchFavouriteUsecase(
+    open fun fetchFavouriteUsecase(
         repository: LocationRepository
     ): FetchFavourite =
         ApplicationFetchFavourite(repository)
 
     @Bean
-    fun removeFromFavouritesUsecase(
+    open fun removeFromFavouritesUsecase(
         repository: LocationRepository
     ): RemoveFromFavourites =
         ApplicationRemoveFromFavourites(repository)
 
     @Bean
-    fun saveToFavouritesUsecase(
+    open fun saveToFavouritesUsecase(
         repository: LocationRepository
     ): SaveToFavourites =
         ApplicationSaveToFavourites(repository)
 
     @Bean
-    fun searchUsecase(
+    open fun searchUsecase(
         repository: LocationRepository
     ): SearchForLocation =
         ApplicationSearchForLocation(repository)
 
     @Bean
-    fun locationService(
+    open fun locationService(
         fetchFavouriteUsecase: FetchFavourite,
         removeFromFavouritesUsecase: RemoveFromFavourites,
         saveToFavouritesUsecase: SaveToFavourites,

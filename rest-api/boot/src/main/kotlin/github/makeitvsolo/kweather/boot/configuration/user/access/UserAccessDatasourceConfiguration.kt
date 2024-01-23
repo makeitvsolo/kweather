@@ -12,7 +12,7 @@ import javax.sql.DataSource
 open class UserAccessDatasourceConfiguration {
 
     @Bean
-    fun userRepository(datasource: DataSource): UserRepository =
+    open fun userRepository(datasource: DataSource): UserRepository =
         ConfigureSqlUserRepository.with()
             .datasource(datasource)
             .configured()

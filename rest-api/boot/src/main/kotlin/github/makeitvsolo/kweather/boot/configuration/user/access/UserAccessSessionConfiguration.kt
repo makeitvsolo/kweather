@@ -17,7 +17,7 @@ open class UserAccessSessionConfiguration(env: Environment) {
     private val refreshTtl: Long = env.getProperty("jwt.refresh-time-to-live", Long::class.java) ?: 0L
 
     @Bean
-    fun encodeToken(): EncodeToken =
+    open fun encodeToken(): EncodeToken =
         ConfigureEncodeJwtToken.with()
             .accessAlgorithm(algorithm)
             .refreshAlgorithm(algorithm)

@@ -22,13 +22,13 @@ import org.springframework.context.annotation.Configuration
 open class UserServiceConfiguration {
 
     @Bean
-    fun authenticateUsecase(
+    open fun authenticateUsecase(
         session: EncodeToken
     ): AuthenticateUser =
         ApplicationAuthenticateUser(session)
 
     @Bean
-    fun authorizeUsecase(
+    open fun authorizeUsecase(
         repository: UserRepository,
         encode: Hash,
         session: EncodeToken
@@ -36,13 +36,13 @@ open class UserServiceConfiguration {
         ApplicationAuthorizeUser(repository, encode, session)
 
     @Bean
-    fun refreshTokenUsecase(
+    open fun refreshTokenUsecase(
         session: EncodeToken
     ): RefreshAccessToken =
         ApplicationRefreshAccessToken(session)
 
     @Bean
-    fun registerUsecase(
+    open fun registerUsecase(
         repository: UserRepository,
         encode: Hash,
         userId: Unique<String>
@@ -50,7 +50,7 @@ open class UserServiceConfiguration {
         ApplicationRegisterUser(repository, encode, userId)
 
     @Bean
-    fun userService(
+    open fun userService(
         authenticateUsecase: AuthenticateUser,
         authorizeUsecase: AuthorizeUser,
         refreshTokenUsecase: RefreshAccessToken,

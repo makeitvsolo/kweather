@@ -16,7 +16,7 @@ open class JdbcConfiguration(env: Environment) {
     private val jdbcPassword: String = env.getProperty("postgres.password") ?: ""
 
     @Bean
-    fun jdbcDatasource(): DataSource =
+    open fun jdbcDatasource(): DataSource =
         ConfigureJdbcDatasource.with()
             .url(jdbcUrl)
             .username(jdbcUser)

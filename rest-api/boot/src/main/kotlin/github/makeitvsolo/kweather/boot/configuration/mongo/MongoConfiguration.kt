@@ -18,7 +18,7 @@ open class MongoConfiguration(env: Environment) {
     private val mongoPassword: String = env.getProperty("mongo.password") ?: ""
 
     @Bean
-    fun mongoDatasource(): MongoDatasource =
+    open fun mongoDatasource(): MongoDatasource =
         ConfigureMongoDatasource.with()
             .host(mongoHost)
             .port(mongoPort)

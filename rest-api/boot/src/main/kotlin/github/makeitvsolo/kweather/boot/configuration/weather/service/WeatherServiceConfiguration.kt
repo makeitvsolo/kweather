@@ -16,21 +16,21 @@ import org.springframework.context.annotation.Configuration
 open class WeatherServiceConfiguration {
 
     @Bean
-    fun fetchWeatherUsecase(
+    open fun fetchWeatherUsecase(
         locationRepository: LocationRepository,
         weatherRepository: WeatherRepository
     ): FetchWeather =
         ApplicationFetchWeather(locationRepository, weatherRepository)
 
     @Bean
-    fun fetchForecastUsecase(
+    open fun fetchForecastUsecase(
         locationRepository: LocationRepository,
         weatherRepository: WeatherRepository
     ): FetchForecast =
         ApplicationFetchForecast(locationRepository, weatherRepository)
 
     @Bean
-    fun weatherService(
+    open fun weatherService(
         fetchWeatherUsecase: FetchWeather,
         fetchForecastUsecase: FetchForecast
     ): WeatherService =

@@ -19,11 +19,11 @@ import javax.sql.DataSource
 @Configuration
 open class WeatherDatasourceConfiguration(env: Environment) {
 
-    private val apiKey: String = env.getProperty("") ?: ""
-    private val forecastDays: Int = env.getProperty("", Int::class.java) ?: 0
+    private val apiKey: String = env.getProperty("weather-api.key") ?: ""
+    private val forecastDays: Int = env.getProperty("weather-api.forecast-days", Int::class.java) ?: 0
 
     @Bean
-    fun locationRepository(datasource: DataSource): LocationRepository {
+    open fun locationRepository(datasource: DataSource): LocationRepository {
         val sql = ConfigureSqlLocationRepository.with()
             .datasource(datasource)
             .configured()
@@ -42,7 +42,7 @@ open class WeatherDatasourceConfiguration(env: Environment) {
     }
 
     @Bean
-    fun weatherRepository(datasource: MongoDatasource): WeatherRepository {
+    open fun weatherRepository(datasource: MongoDatasource): WeatherRepository {
         val mongo = ConfigureMongoForecastRepository.with()
             .datasource(datasource)
             .configured()

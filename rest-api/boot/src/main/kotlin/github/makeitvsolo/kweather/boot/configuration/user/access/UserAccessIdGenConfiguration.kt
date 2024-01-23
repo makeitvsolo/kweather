@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration
 open class UserAccessIdGenConfiguration {
 
     @Bean
-    fun unique(): Unique<String> =
+    open fun unique(): Unique<String> =
         UniqueId()
 }
