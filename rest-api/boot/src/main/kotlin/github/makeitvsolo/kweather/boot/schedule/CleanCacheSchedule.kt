@@ -23,6 +23,6 @@ open class CleanCacheSchedule(
     }
 
     companion object {
-        private val log = LoggerFactory.getLogger(CachedWeatherRepository::class.java)
+        private val log = LoggerFactory.getLogger(CleanCacheSchedule::class.java)
     }
 }
