@@ -14,13 +14,15 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 
 @RestControllerAdvice
 open class WebExceptionHandling {
 
     @ExceptionHandler(
         MethodArgumentNotValidException::class,
-        MissingServletRequestParameterException::class
+        MissingServletRequestParameterException::class,
+        MethodArgumentTypeMismatchException::class
     )
     @Order(Ordered.HIGHEST_PRECEDENCE)
     fun handleInvalidPayload(ex: Throwable): ResponseEntity<*> {
