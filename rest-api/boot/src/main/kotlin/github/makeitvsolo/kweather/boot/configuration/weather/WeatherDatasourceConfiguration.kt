@@ -1,11 +1,11 @@
 package github.makeitvsolo.kweather.boot.configuration.weather
 
 import github.makeitvsolo.kweather.weather.api.datasource.location.LocationRepository
-import github.makeitvsolo.kweather.weather.api.datasource.weather.WeatherRepository
 import github.makeitvsolo.kweather.weather.infrastructure.configure.mongo.MongoDatasource
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.base.configure.ConfigureBaseLocationRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.sql.configure.ConfigureSqlLocationRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.location.weatherapi.configure.ConfigureWeatherApiLocationRepository
+import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.cache.CachedWeatherRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.cache.configure.ConfigureCachedWeatherRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.mongo.configure.ConfigureMongoForecastRepository
 import github.makeitvsolo.kweather.weather.infrastructure.datasource.weather.weatherapi.configure.ConfigureWeatherApiWeatherRepository
@@ -42,7 +42,7 @@ open class WeatherDatasourceConfiguration(env: Environment) {
     }
 
     @Bean
-    open fun weatherRepository(datasource: MongoDatasource): WeatherRepository {
+    open fun weatherRepository(datasource: MongoDatasource): CachedWeatherRepository {
         val mongo = ConfigureMongoForecastRepository.with()
             .datasource(datasource)
             .configured()
