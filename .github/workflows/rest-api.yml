@@ -10,6 +10,9 @@ defaults:
   run:
     working-directory: ./rest-api
 
+env:
+  API_KEY: ${{ secrets.API_KEY }}
+
 jobs:
   check:
     runs-on: ubuntu-latest

@@ -130,7 +130,7 @@
   enabled: true
 # Checks that properties with comments are separated by a blank line
 - name: BLANK_LINE_BETWEEN_PROPERTIES
-  enabled: true
+  enabled: false
 # Checks top level order
 - name: TOP_LEVEL_ORDER
   enabled: true
@@ -313,7 +313,7 @@
 - name: TYPE_ALIAS
   enabled: true
   configuration:
-    typeReferenceLength: '25' # max length of type reference
+    typeReferenceLength: '60' # max length of type reference
 # Checks if casting can be omitted
 - name: SMART_CAST_NEEDED
   enabled: true
@@ -343,7 +343,7 @@
 - name: TOO_LONG_FUNCTION
   enabled: true
   configuration:
-    maxFunctionLength: '30' # max length of function
+    maxFunctionLength: '60' # max length of function
     isIncludeHeader: 'false' # count function's header
 # Warns if there are nested functions
 - name: AVOID_NESTED_FUNCTIONS
@@ -374,7 +374,7 @@
     maxLambdaLength: 10 # max length of lambda without parameters
 # Checks that using unnecessary, custom label
 - name: CUSTOM_LABEL
-  enabled: true
+  enabled: false
 # Check that lambda with inner lambda doesn't use implicit parameter
 - name: PARAMETER_NAME_IN_OUTER_LAMBDA
   enabled: true

@@ -1,0 +1,20 @@
+# sign-up
+curl --verbose \
+     --header 'Content-Type: application/json' \
+     --request POST \
+     --data '{"name": "yourname", "password": "passwd"}' \
+     'http://localhost:8080/api/v1/user-access/sign-up'
+
+# sign-in
+curl --verbose \
+     --header 'Content-Type: application/json' \
+     --request POST \
+     --data '{"name": "yourname", "password": "passwd"}' \
+     'http://localhost:8080/api/v1/user-access/sign-in'
+
+# refresh
+curl --verbose \
+     --header 'Content-Type: application/json' \
+     --request POST \
+     --data '{"token": "$TOKEN"}' \
+     'http://localhost:8080/api/v1/user-access/refresh-token'

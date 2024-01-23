@@ -1,0 +1,44 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+
+web:
+  cors:
+    allowed-origins: "http://localhost:8080,http://localhost:5173,http://localhost:3000"
+    allowed-headers: "Access-Control-Allow-Origin,Access-Control-Allow-Origin,Accept,Accept-Language,Content-Type,Content-Length,Cookie"
+    allowed-methods: "GET,POST,PATCH,PUT,DELETE,OPTIONS,HEAD"
+
+schedule:
+  cache-clean:
+    cron:
+      expression: "0 0 12 * * ?"
+      zone: "Europe/Moscow"
+
+encoding:
+  cost: 6
+  salt: supersecret_salt
+
+jwt:
+  algorithm: "hmac256"
+  access-secret: "accesssupersecret"
+  access-time-to-live: 500
+  refresh-secret: "refreshsupersecret"
+  refresh-time-to-live: 3600
+
+weather-api:
+  key: ${API_KEY}
+  forecast-days: 2
+
+postgres:
+  url: jdbc:postgresql://localhost:5432/kweather
+  username: username
+  password: userpassword
+
+mongo:
+  host: "localhost"
+  port: 27017
+  database: "kweather"
+  auth-database: "admin"
+  username: username
+  password: userpassword
