@@ -1,0 +1,42 @@
+# add to favourites
+curl --verbose \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer $TOKEN' \
+     --request POST \
+     --data '{"latitude": 51.52, "longitude": -0.11}' \
+     'http://localhost:8080/api/v1/locations'
+
+# remove from favourites
+curl --verbose \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer $TOKEN' \
+     --request DELETE \
+     'http://localhost:8080/api/v1/locations/51.52,-0.11'
+
+# fetch favourites
+curl --verbose \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer $TOKEN' \
+     --request GET \
+     'http://localhost:8080/api/v1/locations'
+
+# search by name
+curl --verbose \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer $TOKEN' \
+     --request GET \
+     'http://localhost:8080/api/v1/locations?search=London'
+
+# fetch weather
+curl --verbose \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer $TOKEN' \
+     --request GET \
+     'http://localhost:8080/api/v1/locations/51.52,-0.11/weather'
+
+# fetch forecast
+curl --verbose \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer $TOKEN' \
+     --request GET \
+     'http://localhost:8080/api/v1/locations/51.52,-0.11/forecast'
