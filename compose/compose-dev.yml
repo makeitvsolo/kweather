@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    volumes:
+      - ~/data/postgres:/var/lib/postgresql/data/
+      - ../rest-api/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: kweather
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: userpassword
+    ports:
+      - "5432:5432"
+  
+  mongo:
+    image: mongo:4.0.10
+    restart: always
+    volumes:
+      - ~/data/mongo:/data/db
+      - ../rest-api/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: userpassword
+      MONGO_INITDB_DATABASE: kweather
+    ports:
+      - "27017:27017"
